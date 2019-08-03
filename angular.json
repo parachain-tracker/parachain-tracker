@@ -4,6 +4,12 @@
         "parachain-tracker": {
             "projectType": "application",
             "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss",
+                    "changeDetection": "OnPush",
+                    "inlineTemplate": true,
+                    "prefix": "pt"
+                },
                 "@nrwl/angular:component": {
                     "style": "scss",
                     "changeDetection": "OnPush",
