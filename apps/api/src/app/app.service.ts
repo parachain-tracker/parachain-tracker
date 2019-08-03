@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { Message } from '@parachain-tracker/api-interfaces';
+import { Injectable } from "@nestjs/common"
+import { Message } from "@parachain-tracker/api-interfaces"
 
 @Injectable()
 export class AppService {
-  getData(): Message {
-    return { message: 'Welcome to api!' };
-  }
+    getData(): Message {
+        return { message: "Welcome to api!" }
+    }
 }
