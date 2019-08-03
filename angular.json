@@ -29,6 +29,9 @@
                             "apps/parachain-tracker/src/assets"
                         ],
                         "styles": ["apps/parachain-tracker/src/styles.scss"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/parachain-tracker/src/styles"]
+                        },
                         "scripts": []
                     },
                     "configurations": {
