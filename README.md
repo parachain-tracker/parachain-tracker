@@ -12,12 +12,18 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/parachain-tracker/parachain-tracker.git
-```
-
-CD and install dependencies
-
-```
 cd parachain-tracker
+```
+
+For development check out the develop branch
+
+```bash
+git checkout develop
+```
+
+Install dependencies
+
+```bash
 npm install
 ```
 
