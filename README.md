@@ -1,8 +1,31 @@
 # ParachainTracker
 
-## Environment
-- Node: 10.15.3
-- Angular CLI: 8.2.0
+## Global Environment
+
+-   Node: 10.15.3
+-   Angular CLI: 8.2.0
+-   Commitizen: 4.0.3 (optional)
+
+## Setup
+
+Clone this repository:
+
+```bash
+git clone https://github.com/parachain-tracker/parachain-tracker.git
+```
+
+CD and install dependencies
+
+```
+cd parachain-tracker
+npm install
+```
+
+## Development server
+
+Run `ng serve` for the Client dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+Run `ng serve api` for the API dev server. This will spin up at http://localhost:3333/api. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -34,19 +57,15 @@ Server side generators are provided by NestJS. Refer to the docs for [available 
 
 Run `ng g @nrwl/nest:module --project=api` to generate a module.
 
-Run `ng g @nrwl/nest:controller --project=api` to generate an api controller.
+Run `ng g @nrwl/nest:controller --project=api` to generate an API controller.
 
 Run `ng g @nrwl/nest:service --project=api` to generate an injectable service.
 
-## Development server
-
-Run `ng serve` for the client dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-Run `ng serve api` for the api dev server. This will spin up at http://localhost:3333/api. The app will automatically reload if you change any of the source files.
-
 ## Build
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run build` to build the whole project. The build artifacts will be stored in the `dist/` directory.
+
+For debugging builds, run `ng build` for the Client and `ng build api` for the API.
 
 ## Running unit tests
 
@@ -56,7 +75,7 @@ Run `nx affected:test` to execute the unit tests affected by a change.
 
 ## Running end-to-end tests
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Run `ng e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
 Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
@@ -64,6 +83,18 @@ Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
 Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
+## Contributing
+
+Before committing your changes, run `npm run format` to ensure the project stays properly formatted.
+
+Ensure your commits follow [Conventional Commit](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional) guidelines. If you have installed `commitizen`, run `git cz` from the terminal to help you write well formatted commit messages.
+
+To update the version and generate the changelog, run `npm run version`.
+
+Master is the release branch. Make your PRs to the develop branch.
+
 ## Further help
 
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+Visit the [Angular Documentation](https://angular.io/docs) to learn more about the Client stack.
+Visit the [NestJS Documentation](https://docs.nestjs.com/) to learn more about the API stack.
+Visit the [Nx Documentation](https://nx.dev/angular) to learn more about the project structure.

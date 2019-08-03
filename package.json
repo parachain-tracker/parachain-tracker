@@ -20,8 +20,7 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
-    "commit": "git-cz",
-    "format": "nx format:write --help",
+    "format": "nx format:write",
     "format:all": "nx format:write --all",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
@@ -90,6 +89,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run format:check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
