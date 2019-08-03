@@ -14,6 +14,7 @@ npm install -g @angular/cli
 
 Go to the root of the local copy of this repo and run
 ```bash
+npm install
 ng serve
 ```
 
