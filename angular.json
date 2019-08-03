@@ -89,7 +89,7 @@
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "apps/parachain-tracker/jest.config.js",
+                        "jestConfig": "apps/parachain-tracker/jest-angular.config.js",
                         "tsConfig": "apps/parachain-tracker/tsconfig.spec.json",
                         "setupFile": "apps/parachain-tracker/src/test-setup.ts"
                     }
