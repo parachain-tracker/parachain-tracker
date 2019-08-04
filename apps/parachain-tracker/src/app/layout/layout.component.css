@@ -1,0 +1,94 @@
+nav {
+  /* Rectangle */
+  display: flex;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  height: 56px;
+  z-index: 1;
+  /* Accent */
+  background: #E6007A;
+  mix-blend-mode: hard-light;
+  box-shadow: 0px 4px 4px rgba(103, 14, 53, 0.25); }
+
+h1 {
+  /* ParachainTracker */
+  position: absolute;
+  left: 2.88%;
+  right: 79.74%;
+  top: -10%;
+  font-family: "Futura Light BT";
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+  /* Off White */
+  color: #F7F3F7; }
+
+.submit-project {
+  /* Rectangle 3 */
+  position: absolute;
+  right: 24px;
+  top: 10px;
+  bottom: 10px;
+  /* Subtle */
+  width: 170px;
+  border: 2px solid #D3B9C3;
+  box-sizing: border-box;
+  border-radius: 2px; }
+
+h3 {
+  /* Submit a PROJECT */
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  font-family: "Futura Light BT";
+  font-weight: bolder;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height, or 133% */
+  text-transform: uppercase;
+  /* Off White */
+  color: #F7F3F7;
+  border-radius: 2px; }
+
+footer {
+  /* Rectangle 2 */
+  position: absolute;
+  width: 100%;
+  height: 72px;
+  left: 0px;
+  top: 1040px;
+  /* Off Black */
+  background: #2D2F33; }
+
+.reddit {
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/social/reddit.svg") no-repeat; }
+
+.twitter {
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/social/twitter.svg") no-repeat; }
+
+.medium {
+  width: 24px;
+  height: 24px;
+  margin-top: 3px;
+  background: url("../../assets/social/medium.svg") no-repeat; }
+
+.social {
+  /* Frame */
+  position: absolute;
+  right: 246px;
+  top: 28.57%;
+  bottom: 28.57%;
+  display: flex;
+  width: 104px;
+  height: 24px;
+  z-index: 1;
+  justify-content: space-around; }
+
+/*# sourceMappingURL=layout.component.css.map */

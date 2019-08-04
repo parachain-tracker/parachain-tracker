@@ -3,3 +3,11 @@ $accent-color: #e6007a;
 $subtle-color: #d3b9c3;
 $light-color: #f7f3f7;
 $dark-color: #2d2f33;
+
+
+@font-face {
+    font-family: 'Futura Light BT';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Futura Light BT'), url('../assets/Futura Light BT.woff') format('woff');
+}

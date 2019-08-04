@@ -1,0 +1,67 @@
+@charset "UTF-8";
+div {
+  position: absolute;
+  width: 100%;
+  height: 616px;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(295.35deg, #A644C9 0%, #E6007A 48.62%); }
+
+.hero-txt {
+  float: left; }
+
+.hero-svg {
+  /* Logos */
+  position: absolute;
+  left: 423px;
+  top: 183px;
+  background: url("../../../assets/Logos.svg") no-repeat;
+  overflow: hidden; }
+
+h1 {
+  /* Explore DApps and Parachains  on the Polkadot Network */
+  width: 613px;
+  height: 112px;
+  margin-left: 56px;
+  margin-top: 102px;
+  font-family: "Futura Light BT";
+  font-weight: lighter;
+  font-size: 48px;
+  line-height: 56px;
+  /* or 117% */
+  /* Off White */
+  color: #F7F3F7; }
+
+h2 {
+  width: 393px;
+  height: 96px;
+  margin-left: 56px;
+  margin-top: 22px;
+  font-family: "Futura Light BT";
+  font-size: 16px;
+  line-height: 24px;
+  color: #f7f3f7; }
+
+.hero-link {
+  margin-left: 86px;
+  margin-bottom: 24px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  text-decoration-line: underline;
+  color: #f7f3f7; }
+
+section {
+  /* Rectangle 2 */
+  position: absolute;
+  width: 100%;
+  height: 112px;
+  left: 0px;
+  top: 616px;
+  /* Subtle */
+  background: #D3B9C3; }
+
+/*# sourceMappingURL=hero.component.css.map */

@@ -5,15 +5,9 @@ import { Message } from "@parachain-tracker/api-interfaces"
 @Component({
     selector: "pt-root",
     template: `
-        <div style="text-align:center">
-            <h1>Welcome to parachain-tracker!</h1>
-            <img
-                width="450"
-                src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-                alt=""
-            />
-        </div>
-        <div>Message: {{ hello$ | async | json }}</div>
+       <pt-layout><router-outlet>
+           
+       </router-outlet></pt-layout>
     `,
     styleUrls: ["./app.component.scss"],
 })
