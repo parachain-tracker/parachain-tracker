@@ -16,8 +16,8 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@parachain-tracker/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-            "@parachain-tracker/components": ["libs/components/src/index.ts"]
+            "@parachain-tracker/api-interfaces": ["libs/api-interfaces/index.ts"],
+            "@parachain-tracker/components": ["libs/components/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

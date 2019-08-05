@@ -232,7 +232,7 @@
                     "options": {
                         "jestConfig": "libs/components/jest-angular.config.js",
                         "tsConfig": "libs/components/tsconfig.spec.json",
-                        "setupFile": "libs/components/src/test-setup.ts"
+                        "setupFile": "libs/components/test-setup.ts"
                     }
                 }
             },
