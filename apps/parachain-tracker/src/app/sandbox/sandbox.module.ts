@@ -2,8 +2,7 @@ import { NgModule } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { SandboxComponent } from "./sandbox.component"
 import { provideRoutes, RouterModule, Routes } from "@angular/router"
-import { ProjectTileModule } from "@parachain-tracker/components"
-import { components } from "./config"
+import { components, modules } from "./config"
 
 export const routes: Routes = [
     {
@@ -15,7 +14,7 @@ export const routes: Routes = [
 
 @NgModule({
     declarations: [SandboxComponent],
-    imports: [CommonModule, ProjectTileModule, RouterModule],
+    imports: [CommonModule, RouterModule, modules],
     providers: [provideRoutes(routes)],
 })
 export class SandboxModule {}
