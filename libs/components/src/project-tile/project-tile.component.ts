@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core"
 import { ProjectTile } from "./interfaces"
 
 @Component({
-    selector: "pt-feature-tile",
+    selector: "pt-project-tile",
     template: `
         <div class="frame">
-            <div class="rank" *ngIf="feature.rank">
+            <div class="rank rank--{{ feature.rank }}" *ngIf="feature.rank">
                 <span class="rank-hash">#</span>
                 <span class="rank-number" [innerText]="feature.rank"></span>
             </div>

@@ -59,6 +59,27 @@
         width: 56px;
         height: 56px;
     }
+
+    &--1 {
+        &:before {
+            background: linear-gradient(135deg, #d4af37 0%, #d4af37 50%, transparent 50%);
+            color: #ffffff;
+        }
+    }
+
+    &--2 {
+        &:before {
+            background: linear-gradient(135deg, #918e8c 0%, #918e8c 50%, transparent 50%);
+            color: #ffffff;
+        }
+    }
+
+    &--3 {
+        &:before {
+            background: linear-gradient(135deg, #8d8752 0%, #8d8752 50%, transparent 50%);
+            color: #ffffff;
+        }
+    }
 }
 
 .rank-hash {

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing"
 
 import { ProjectTileComponent } from "./project-tile.component"
 
-describe("FeatureTileComponent", () => {
+describe("ProjectTileComponent", () => {
     let component: ProjectTileComponent
     let fixture: ComponentFixture<ProjectTileComponent>
 
