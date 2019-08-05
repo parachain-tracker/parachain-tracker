@@ -1,0 +1,7 @@
+{
+    "extends": "../../tslint.json",
+    "rules": {
+        "directive-selector": [true, "attribute", "parachainTracker", "camelCase"],
+        "component-selector": [true, "element", "parachain-tracker", "kebab-case"]
+    }
+}
