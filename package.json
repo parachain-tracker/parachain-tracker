@@ -46,7 +46,9 @@
         "@nestjs/core": "6.5.3",
         "@nestjs/platform-express": "6.5.3",
         "@nrwl/angular": "8.4.3",
+        "@types/flickity": "2.2.0",
         "core-js": "3.1.4",
+        "flickity": "2.2.1",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.2",
         "zone.js": "0.9.1"
