@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.navigation {
+    width: 300px;
+    padding: 40px;
+    background: var(--pt-light-color);
+
+    > a {
+        display: block;
+        height: 40px;
+        font-size: 16px;
+        font-family: var(--pt-font-sans);
+        color: var(--pt-primary-color);
+
+        &.is-active {
+            font-weight: bold;
+        }
+    }
+}
+
+.content {
+    padding: 40px;
+}

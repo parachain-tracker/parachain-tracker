@@ -3,20 +3,6 @@
     "projects": {
         "parachain-tracker": {
             "projectType": "application",
-            "schematics": {
-                "@schematics/angular:component": {
-                    "style": "scss",
-                    "changeDetection": "OnPush",
-                    "inlineTemplate": true,
-                    "prefix": "pt"
-                },
-                "@nrwl/angular:component": {
-                    "style": "scss",
-                    "changeDetection": "OnPush",
-                    "inlineTemplate": true,
-                    "prefix": "pt"
-                }
-            },
             "root": "apps/parachain-tracker",
             "sourceRoot": "apps/parachain-tracker/src",
             "prefix": "pt",
@@ -34,7 +20,10 @@
                             "apps/parachain-tracker/src/favicon.ico",
                             "apps/parachain-tracker/src/assets"
                         ],
-                        "styles": ["apps/parachain-tracker/src/styles.scss"],
+                        "styles": [
+                            "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                            "apps/parachain-tracker/src/styles.scss"
+                        ],
                         "stylePreprocessorOptions": {
                             "includePaths": ["apps/parachain-tracker/src/styles"]
                         },
@@ -210,6 +199,37 @@
                     }
                 }
             }
+        },
+        "components": {
+            "projectType": "library",
+            "root": "libs/components",
+            "sourceRoot": "libs/components/src",
+            "prefix": "pt",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/components/tsconfig.lib.json",
+                            "libs/components/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/components/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/jest-angular.config.js",
+                        "tsConfig": "libs/components/tsconfig.spec.json",
+                        "setupFile": "libs/components/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
         }
     },
     "cli": {
@@ -222,6 +242,18 @@
         },
         "@nrwl/angular:library": {
             "unitTestRunner": "jest"
+        },
+        "@schematics/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush",
+            "inlineTemplate": true,
+            "prefix": "pt"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush",
+            "inlineTemplate": true,
+            "prefix": "pt"
         }
     },
     "defaultProject": "parachain-tracker"
