@@ -1,93 +1,88 @@
 nav {
-  /* Rectangle */
+    /* Rectangle */
 
-  display: flex;
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  height: 56px;
+    display: flex;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    height: 56px;
     z-index: 1;
 
-  /* Accent */
+    /* Accent */
 
-  background: #E6007A;
-  mix-blend-mode: hard-light;
-  box-shadow: 0px 4px 4px rgba(103, 14, 53, 0.25);
+    background: #e6007a;
+    mix-blend-mode: hard-light;
+    box-shadow: 0px 4px 4px rgba(103, 14, 53, 0.25);
 }
 
 h1 {
-  /* ParachainTracker */
+    /* ParachainTracker */
 
+    position: absolute;
+    left: 2.88%;
+    right: 79.74%;
+    top: -10%;
 
-  position: absolute;
-  left: 2.88%;
-  right: 79.74%;
-  top: -10%;
+    font-family: "Futura Light BT";
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
 
-  font-family: "Futura Light BT";
-  font-size: 24px;
-  line-height: 29px;
-  /* identical to box height */
+    /* Off White */
 
-
-  /* Off White */
-
-  color: #F7F3F7;
+    color: #f7f3f7;
 }
 
 .submit-project {
-  /* Rectangle 3 */
+    /* Rectangle 3 */
 
+    position: absolute;
+    right: 24px;
+    top: 10px;
+    bottom: 10px;
 
-  position: absolute;
-  right: 24px;
-  top: 10px;
-  bottom: 10px;
-
-  /* Subtle */
-  width: 170px;
-  border: 2px solid #D3B9C3;
-  box-sizing: border-box;
-  border-radius: 2px;
+    /* Subtle */
+    width: 170px;
+    border: 2px solid #d3b9c3;
+    box-sizing: border-box;
+    border-radius: 2px;
 }
 
 h3 {
-  /* Submit a PROJECT */
+    /* Submit a PROJECT */
 
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
 
+    font-family: "Futura Light BT";
+    font-weight: bolder;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
 
-  font-family: "Futura Light BT";
-  font-weight: bolder;
-  font-size: 18px;
-  line-height: 24px;
-  /* identical to box height, or 133% */
+    text-transform: uppercase;
 
-  text-transform: uppercase;
+    /* Off White */
 
-  /* Off White */
-
-  color: #F7F3F7;
-  border-radius: 2px;
-
+    color: #f7f3f7;
+    border-radius: 2px;
 }
 
 footer {
-  /* Rectangle 2 */
+    /* Rectangle 2 */
 
-  position: absolute;
-  width: 100%;
-  height: 72px;
-  left: 0px;
-  top: 1040px;
+    position: absolute;
+    width: 100%;
+    height: 72px;
+    left: 0px;
+    top: 1040px;
 
-  /* Off Black */
+    /* Off Black */
 
-  background: #2D2F33;
+    background: #2d2f33;
 }
 
 .reddit {

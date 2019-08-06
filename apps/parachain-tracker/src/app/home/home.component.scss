@@ -1,3 +1,5 @@
+@import "variables";
+
 section {
     /* Rectangle 2 */
     width: 100%;
@@ -5,5 +7,5 @@ section {
 
     /* Subtle */
 
-    background: #D3B9C3;
+    background: $subtle-color;
 }

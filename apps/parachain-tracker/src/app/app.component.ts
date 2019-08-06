@@ -5,9 +5,7 @@ import { Message } from "@parachain-tracker/api-interfaces"
 @Component({
     selector: "pt-root",
     template: `
-       <pt-layout><router-outlet>
-           
-       </router-outlet></pt-layout>
+        <pt-layout><router-outlet> </router-outlet></pt-layout>
     `,
     styleUrls: ["./app.component.scss"],
 })

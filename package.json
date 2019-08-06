@@ -41,11 +41,13 @@
     "@angular/platform-browser": "8.2.0",
     "@angular/platform-browser-dynamic": "8.2.0",
     "@angular/router": "8.2.0",
+    "@fortawesome/fontawesome-free": "5.10.1",
     "@nestjs/common": "6.5.3",
     "@nestjs/core": "6.5.3",
     "@nestjs/platform-express": "6.5.3",
     "@nrwl/angular": "8.4.3",
     "core-js": "3.1.4",
+    "flickity": "2.2.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.2",
     "zone.js": "0.9.1"

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core"
 
 @Component({
-  selector: 'pt-layout',
-  styleUrls: ['./layout.component.scss'],
+    selector: "pt-layout",
+    styleUrls: ["./layout.component.scss"],
     template: `
         <nav>
             <h1>ParachainTracker</h1>
@@ -17,15 +17,11 @@ import { Component, OnInit } from '@angular/core';
         </nav>
         <div style="height: 56px"></div>
         <ng-content></ng-content>
-        <footer>
-        </footer>
-    `
+        <footer></footer>
+    `,
 })
 export class LayoutComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() {}
 }
