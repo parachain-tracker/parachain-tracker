@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common"
 import { SandboxComponent } from "./sandbox.component"
 import { provideRoutes, RouterModule, Routes } from "@angular/router"
 import { components, modules } from "./config"
+import { HostModule } from "./host.module"
 
 export const routes: Routes = [
     {
@@ -14,7 +15,7 @@ export const routes: Routes = [
 
 @NgModule({
     declarations: [SandboxComponent],
-    imports: [CommonModule, RouterModule, modules],
+    imports: [CommonModule, RouterModule, HostModule, modules],
     providers: [provideRoutes(routes)],
 })
 export class SandboxModule {}

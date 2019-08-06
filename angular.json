@@ -21,6 +21,7 @@
                             "apps/parachain-tracker/src/assets"
                         ],
                         "styles": [
+                            "./node_modules/flickity/dist/flickity.css",
                             "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                             "apps/parachain-tracker/src/styles.scss"
                         ],
