@@ -31,3 +31,17 @@ body {
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: "Futura Light BT";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Futura Light BT"), url("assets/Futura Light BT.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Futura MdCn BT";
+    font-style: normal;
+    font-weight: normal;
+    src: url("assets/FuturaMediumCondensedBT.ttf");
+}

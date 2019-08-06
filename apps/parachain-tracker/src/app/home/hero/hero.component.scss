@@ -1,0 +1,120 @@
+.hero-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 616px;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+
+    background: linear-gradient(295.35deg, #a644c9 0%, #e6007a 48.62%);
+}
+
+.hero-txt {
+    float: left;
+}
+
+.hero-svg {
+    /* Logos */
+
+    position: relative;
+    left: 400px;
+    top: -360px;
+    width: 652px;
+    height: 423px;
+    background: url("/assets/Logos.svg") no-repeat;
+    overflow: hidden;
+}
+
+.goto {
+    width: 24px;
+    height: 24px;
+    background: url("/assets/goto.svg") no-repeat;
+    margin-right: 8px;
+}
+
+.goto-container {
+    margin-left: 50px;
+    margin-bottom: 24px;
+    display: flex;
+}
+
+h1 {
+    /* Explore DApps and Parachains  on the Polkadot Network */
+
+    min-width: 613px;
+    height: 112px;
+    margin-left: 56px;
+    margin-top: 102px;
+    max-width: 1280px;
+
+    font-family: "Futura Light BT";
+    font-weight: lighter;
+    font-size: 48px;
+    line-height: 56px;
+    /* or 117% */
+
+    /* Off White */
+
+    color: #f7f3f7;
+}
+
+h2 {
+    width: 393px;
+    height: 96px;
+    margin-left: 56px;
+    margin-top: 22px;
+    font-family: "Futura Light BT";
+    font-size: 16px;
+    line-height: 24px;
+
+    color: #f7f3f7;
+}
+
+.hero-link {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    text-decoration-line: underline;
+
+    color: #f7f3f7;
+}
+
+section {
+    /* Rectangle 2 */
+
+    position: absolute;
+    width: 100%;
+    height: 112px;
+    left: 0px;
+    top: 616px;
+
+    /* Subtle */
+
+    background: #d3b9c3;
+}
+
+.goto-button {
+    width: 295px;
+    height: 64px;
+    margin-top: 20px;
+    margin-left: 50px;
+    background: linear-gradient(270deg, #e6007a 0%, #fe00bd 100%);
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px rgba(103, 14, 53, 0.5);
+    border: none;
+}
+
+.goto-button p {
+    margin-top: 18px;
+    font-family: "Futura MdCn BT";
+    font-size: 28px;
+    line-height: 24px;
+    /* identical to box height, or 86% */
+    text-transform: capitalize;
+    color: #f7f3f7;
+}
