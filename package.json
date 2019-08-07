@@ -31,7 +31,7 @@
     "help": "nx help",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "db": "./.bin/db",
-    "db:init": "./.bin/db migration:generate -n CreateDatabase && ./bin/db schema:sync",
+    "db:init": "./.bin/db migration:generate -n CreateDatabase && ./.bin/db schema:sync",
     "db:migration:generate": "./.bin/db migration:generate -n MigrateDatabase",
     "db:migration:run": "./.bin/db migration:run",
     "db:migration:revert": "./.bin/db migration:revert",

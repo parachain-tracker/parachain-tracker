@@ -29,7 +29,7 @@ npm install
 
 ## Database
 
-Run the following script to set up a database for development
+Run the following script to set up the database for development
 
 ```bash
 npm run db:init
@@ -57,6 +57,12 @@ When ready, migrate to the latest schema
 
 ```bash
 npm run db:migration:run
+```
+
+Revert a bad migration
+
+```bash
+npm run db:migration:revert
 ```
 
 ## Development server

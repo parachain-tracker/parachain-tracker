@@ -1,0 +1,2 @@
+#!/bin/sh
+ts-node -r tsconfig-paths/register --project apps/api/tsconfig.json node_modules/typeorm/cli "$@"
