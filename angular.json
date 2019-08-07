@@ -255,6 +255,57 @@
             "changeDetection": "OnPush",
             "inlineTemplate": true,
             "prefix": "pt"
+        },
+        "@nestjs/schematics:class": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:client-app": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:configuration": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:controller": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:decorator": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:filter": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:gateway": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:guard": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:interceptor": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:interface": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:library": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:middleware": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:module": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:pipe": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:provider": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:resolver": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:service": {
+            "sourceRoot": "."
         }
     },
     "defaultProject": "parachain-tracker"
