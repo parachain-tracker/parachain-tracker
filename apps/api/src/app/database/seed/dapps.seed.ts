@@ -36,12 +36,12 @@ export default class CreateDapps implements Seeder {
 
         await times(10, async n => {
             const randomLinks = getRandomSubarray(linkEntities, linkCount)
-            const dapp = await factory(ProjectEntity)().make()
-            dapp.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
-            dapp.externalLinks = randomLinks
+            const project = await factory(ProjectEntity)().make()
+            project.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
+            project.externalLinks = randomLinks
 
-            await em.save(dapp.category)
-            await em.save(dapp)
+            await em.save(project.category)
+            await em.save(project)
         })
     }
 }
