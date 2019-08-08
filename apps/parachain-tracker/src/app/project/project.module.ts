@@ -10,6 +10,7 @@ import {
 } from "@angular/router"
 import { Observable } from "rxjs"
 import { ApiService } from "../api/api.service"
+import { TickerModule } from "@parachain-tracker/components"
 
 export class ProjectResolver implements Resolve<any> {
     constructor(private api: ApiService) {}
@@ -34,7 +35,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [ProjectComponent],
-    imports: [CommonModule, RouterModule.forChild(routes)],
+    imports: [CommonModule, RouterModule.forChild(routes), TickerModule],
     providers: [ProjectResolver],
 })
 export class ProjectModule {}

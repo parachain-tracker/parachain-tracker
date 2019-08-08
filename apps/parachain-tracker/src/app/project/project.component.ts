@@ -65,7 +65,11 @@ import { Observable } from "rxjs"
                     <div class="stats-grid" *ngIf="(tickers$ | async) as tickers">
                         <div class="stats-tile" *ngFor="let ticker of tickers">
                             <span class="stats-tile-title">{{ ticker.name }}</span>
-                            <div class="stats-tile-ticker"></div>
+
+                            <pt-ticker
+                                class="stats-tile-ticker"
+                                [dataSeries]="ticker.coords"
+                            ></pt-ticker>
 
                             <div class="stats-tile-data">
                                 <ng-container *ngFor="let trend of ticker.trends">
