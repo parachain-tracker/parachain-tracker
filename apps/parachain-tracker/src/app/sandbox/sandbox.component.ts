@@ -8,9 +8,9 @@ import {
 import { Router, RouterOutlet, Routes } from "@angular/router"
 import { Subscription } from "rxjs"
 
-function createPaths(config: Routes, paths: string[], parent: string = "") {
+function createPaths(config: Routes, paths: string[], parent: string = "sandbox") {
     config.forEach(route => {
-        paths.push(parent ? `${parent}/${route.path}` : route.path)
+        paths.push(`${parent}/${route.path}`)
 
         if (route.children) {
             createPaths(route.children, paths, route.path)
@@ -53,7 +53,10 @@ export class SandboxComponent implements OnDestroy {
         private router: Router,
     ) {
         this.sub = new Subscription()
-        this.paths = createPaths(this.router.config, [])
+        this.paths = createPaths(
+            this.router.config.find(route => route.path === "sandbox").children,
+            [],
+        )
     }
 
     public handleRouteChange(componentInstance) {
