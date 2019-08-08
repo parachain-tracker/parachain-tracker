@@ -1,37 +1,61 @@
-import { Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from "@nestjs/common"
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    Put,
+    ValidationPipe,
+} from "@nestjs/common"
 import { DappsService } from "./dapps.service"
+import { DappDto } from "@parachain-tracker/api-interfaces"
 
 @Controller("dapps")
 export class DappsController {
     constructor(private dapps: DappsService) {}
 
     @Get()
-    public list() {
+    public list(): Promise<DappDto[]> {
         return this.dapps.list()
     }
 
     @Get(":id")
-    public get(@Param("id", ParseIntPipe) id: number) {
+    public get(@Param("id", ParseIntPipe) id: number): Promise<DappDto> {
         return this.dapps.get(id)
     }
 
     @Post()
-    public create(model) {
+    public create(model): Promise<DappDto> {
         return this.dapps.save(model)
     }
 
-    @Patch()
-    public modify(model) {
-        return this.dapps.save(model)
+    @Patch(":id")
+    public modify(
+        @Param("id", ParseIntPipe) id: number,
+        @Body(new ValidationPipe({ skipMissingProperties: true })) model: DappDto,
+    ): Promise<DappDto> {
+        return this.dapps.save({
+            ...model,
+            id,
+        })
     }
 
-    @Put()
-    public replace(model) {
-        return this.dapps.save(model)
+    @Put(":id")
+    public replace(
+        @Param("id", ParseIntPipe) id: number,
+        @Body() model: DappDto,
+    ): Promise<DappDto> {
+        return this.dapps.save({
+            ...model,
+            id,
+        })
     }
 
     @Delete(":id")
-    public delete(@Param("id", ParseIntPipe) id: number) {
-        return this.dapps.delete(id)
+    public async delete(@Param("id", ParseIntPipe) id: number): Promise<void> {
+        await this.dapps.delete(id)
     }
 }

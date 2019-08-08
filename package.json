@@ -58,6 +58,8 @@
     "@nrwl/angular": "8.4.3",
     "@types/faker": "4.1.5",
     "@types/flickity": "2.2.0",
+    "class-transformer": "0.2.3",
+    "class-validator": "^0.9.1",
     "core-js": "3.1.4",
     "flickity": "2.2.1",
     "reflect-metadata": "0.1.13",
