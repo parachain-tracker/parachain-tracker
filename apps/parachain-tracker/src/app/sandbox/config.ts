@@ -3,13 +3,15 @@ import {
     ProjectTileComponent,
     ProjectTileModule,
     SliderModule,
+    TickerComponent,
+    TickerModule,
 } from "@parachain-tracker/components"
 import { Routes } from "@angular/router"
 import { Type } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { HostComponent } from "./host.component"
 
-export const modules: Type<any>[] = [ProjectTileModule, SliderModule]
+export const modules: Type<any>[] = [ProjectTileModule, SliderModule, TickerModule]
 
 export const components: Routes = [
     {
@@ -50,6 +52,16 @@ export const components: Routes = [
                     users: 2340,
                 })),
             },
+        },
+    },
+    {
+        path: "ticker",
+        component: TickerComponent,
+        data: {
+            dataSeries: [65, 59, 80, 81, 56, 55, 40],
+            xAxisLabels: Array.from({ length: 7 }, (_, index) =>
+                new Date(Date.now() + index * 3600 * 24).toISOString(),
+            ),
         },
     },
 ]
