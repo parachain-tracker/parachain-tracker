@@ -4,7 +4,7 @@ import { Type } from "class-transformer"
 import { ExternalLinksDto } from "./external-links-dto"
 import { CategoryDto } from "./category-dto"
 
-export class DappDto {
+export class ProjectDto {
     @IsOptional()
     @IsNumber()
     public id?: number

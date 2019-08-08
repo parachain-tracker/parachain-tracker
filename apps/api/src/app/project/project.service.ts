@@ -1,25 +1,25 @@
 import { Injectable } from "@nestjs/common"
-import { DappEntity } from "../database/entity/dapp.entity"
+import { ProjectEntity } from "../database/entity/project.entity"
 import { DeepPartial, DeleteResult, FindManyOptions, Repository } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 
 @Injectable()
-export class DappsService {
-    constructor(@InjectRepository(DappEntity) private repository: Repository<DappEntity>) {}
+export class ProjectService {
+    constructor(@InjectRepository(ProjectEntity) private repository: Repository<ProjectEntity>) {}
 
-    public list(): Promise<DappEntity[]> {
+    public list(): Promise<ProjectEntity[]> {
         return this.repository.find({ relations: ["category", "externalLinks"] })
     }
 
-    public get(id: number): Promise<DappEntity> {
+    public get(id: number): Promise<ProjectEntity> {
         return this.repository.findOne(id, { relations: ["category", "externalLinks"] })
     }
 
-    public find(query: FindManyOptions<DappEntity>): Promise<DappEntity[]> {
+    public find(query: FindManyOptions<ProjectEntity>): Promise<ProjectEntity[]> {
         return this.repository.find(query)
     }
 
-    public save(model: DeepPartial<DappEntity>): Promise<DappEntity> {
+    public save(model: DeepPartial<ProjectEntity>): Promise<ProjectEntity> {
         return this.repository.save(model)
     }
 

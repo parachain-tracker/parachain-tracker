@@ -1,9 +1,9 @@
 import { define } from "typeorm-seeding"
-import { DappEntity } from "../entity/dapp.entity"
+import { ProjectEntity } from "../entity/project.entity"
 import * as Faker from "faker"
 
-define(DappEntity, (faker: typeof Faker) => {
-    const dapp = new DappEntity()
+define(ProjectEntity, (faker: typeof Faker) => {
+    const dapp = new ProjectEntity()
 
     dapp.name = faker.commerce.productName()
     dapp.commits = faker.random.number(10000)

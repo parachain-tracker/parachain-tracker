@@ -18,6 +18,6 @@ export interface ProjectCategory {
 }
 
 export enum ProjectStatus {
-    LIVE,
-    DOWN,
+    Live,
+    Down,
 }

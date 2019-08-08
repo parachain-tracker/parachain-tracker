@@ -11,8 +11,8 @@ import { CategoryEntity } from "./category.entity"
 import { ProjectStatus } from "@parachain-tracker/api-interfaces"
 import { ExternalLinkEntity } from "./external-link.entity"
 
-@Entity("Dapp")
-export class DappEntity {
+@Entity("Project")
+export class ProjectEntity {
     @PrimaryGeneratedColumn()
     public id: number
 

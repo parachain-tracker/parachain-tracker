@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common"
 import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
-import { DappsModule } from "./dapps/dapps.module"
+import { ProjectModule } from "./project/project.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ConnectionOptions } from "typeorm"
-import { DappEntity } from "./database/entity/dapp.entity"
+import { ProjectEntity } from "./database/entity/project.entity"
 import { CategoryEntity } from "./database/entity/category.entity"
 import { ExternalLinkEntity } from "./database/entity/external-link.entity"
 
@@ -12,11 +12,11 @@ const ormconfig = require("../../../../ormconfig.json")
 
 const connectionOptions: ConnectionOptions = {
     ...ormconfig,
-    entities: [DappEntity, CategoryEntity, ExternalLinkEntity],
+    entities: [ProjectEntity, CategoryEntity, ExternalLinkEntity],
 }
 
 @Module({
-    imports: [TypeOrmModule.forRoot(connectionOptions), DappsModule],
+    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule],
     controllers: [AppController],
     providers: [AppService],
 })

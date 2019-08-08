@@ -2,12 +2,16 @@
 
 :host {
     display: flex;
+    width: 100%;
     min-height: 100vh;
     flex-direction: column;
+    background: $light-color;
     font-family: var(--pt-font-sans);
 }
 
 .frame {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     flex: 1;
     margin: 0 auto;
@@ -110,11 +114,13 @@
 
 .detail {
     display: grid;
+    flex: 1;
     grid-template-areas:
         "description social"
         "stats       social";
     grid-template-columns: auto 72px;
     grid-template-rows: max-content;
+    background: #ffffff;
 }
 
 .social {
@@ -147,7 +153,7 @@
 
 .stats {
     grid-area: stats;
-    padding: 32px 32px 32px 56px;
+    padding: 32px 32px 80px 56px;
 }
 
 .section-heading {

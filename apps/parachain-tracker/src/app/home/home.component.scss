@@ -1,5 +1,10 @@
 @import "variables";
 
+:host {
+    width: 100%;
+    margin-top: -56px;
+}
+
 section {
     /* Rectangle 2 */
     width: 100%;

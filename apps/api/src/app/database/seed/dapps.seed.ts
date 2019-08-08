@@ -1,6 +1,6 @@
 import { Connection } from "typeorm"
 import { Factory, Seeder, times } from "typeorm-seeding"
-import { DappEntity } from "../entity/dapp.entity"
+import { ProjectEntity } from "../entity/project.entity"
 import { CategoryEntity } from "../entity/category.entity"
 import { ExternalLinkEntity } from "../entity/external-link.entity"
 import * as faker from "faker"
@@ -36,7 +36,7 @@ export default class CreateDapps implements Seeder {
 
         await times(10, async n => {
             const randomLinks = getRandomSubarray(linkEntities, linkCount)
-            const dapp = await factory(DappEntity)().make()
+            const dapp = await factory(ProjectEntity)().make()
             dapp.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
             dapp.externalLinks = randomLinks
 
