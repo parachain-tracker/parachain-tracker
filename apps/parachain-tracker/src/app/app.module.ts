@@ -13,8 +13,8 @@ const routes: Routes = [
         loadChildren: "./home/home.module#HomeModule",
     },
     {
-        path: "details/:id",
-        loadChildren: "./details/details.module#DetailsModule",
+        path: "project/:id",
+        loadChildren: "./project/project.module#ProjectModule",
     },
 ]
 

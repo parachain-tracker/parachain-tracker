@@ -1,26 +1,38 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core"
+import { ActivatedRoute } from "@angular/router"
+import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
 
 @Component({
-    selector: "pt-details",
+    selector: "pt-project",
     template: `
         <div class="frame">
             <div class="banner" [style.background-image]="'url(/assets/projects/2/banner.jpg)'">
-                <div class="pill" *ngFor="let tile of tiles">
+                <div class="pill" *ngIf="project.network">
                     <div class="pill-icon"></div>
-                    <div class="pill-label">Finance</div>
+                    <div class="pill-label">{{ project.network }}</div>
+                </div>
+
+                <div class="pill" *ngIf="project.category">
+                    <div class="pill-icon"></div>
+                    <div class="pill-label">{{ project.category.name }}</div>
+                </div>
+
+                <div class="pill" *ngIf="project.status >= 0">
+                    <div class="pill-icon"></div>
+                    <div class="pill-label">{{ projectStatus[project.status] }}</div>
                 </div>
             </div>
 
             <div class="header">
                 <p class="developer">
-                    Esteban Ordano / Dario Sneidermanis / Manuel Aráoz / Yemel Jardi
+                    {{ project.developer }}
                 </p>
                 <div class="logo-frame">
                     <img class="header-logo" src="/assets/projects/2/logo64@2x.png" alt="" />
                 </div>
-                <h1 class="name">Crypto Space Commanders</h1>
+                <h1 class="name">{{ project.name }}</h1>
                 <p class="tagline">A virtual world that runs on open standards.</p>
-                <a href="#" class="web-url">
+                <a [href]="project.link" class="web-url">
                     <i class="web-url-icon fa fa-chevron-circle-right"></i>
                     <span class="web-url-label">Go to website</span>
                 </a>
@@ -28,33 +40,20 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
 
             <div class="detail">
                 <div class="social">
-                    <a class="social-link" href="#" target="_blank">
-                        <i class="social-icon fa fa-comments"></i>
-                    </a>
-                    <a class="social-link" href="#" target="_blank">
-                        <i class="social-icon fab fa-reddit"></i>
-                    </a>
-                    <a class="social-link" href="#" target="_blank">
-                        <i class="social-icon fab fa-twitter"></i>
-                    </a>
-                    <a class="social-link" href="#" target="_blank">
-                        <i class="social-icon fab fa-medium-m"></i>
+                    <a
+                        class="social-link"
+                        *ngFor="let link of project.externalLinks; let index = index"
+                        [href]="link.url"
+                        target="_blank"
+                    >
+                        <i class="social-icon {{ externalLinkIcons[index] }}"></i>
                     </a>
                 </div>
 
                 <div class="description">
                     <h2 class="section-heading">About</h2>
 
-                    <p>
-                        Decentraland is a virtual reality platform powered by the Ethereum
-                        blockchain. Users can create, experience, and monetize content and
-                        applications
-                    </p>
-
-                    <p>
-                        Introducing the Decentraland SDK Alpha. The tools and support you need to
-                        pioneer Genesis City.
-                    </p>
+                    <div [innerHTML]="project.description"></div>
                 </div>
 
                 <div class="stats">
@@ -81,13 +80,31 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
             </div>
         </div>
     `,
-    styleUrls: ["./details.component.scss"],
+    styleUrls: ["./project.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailsComponent implements OnInit {
+export class ProjectComponent {
     public tiles = [1, 2, 3]
 
-    constructor() {}
+    public project: ProjectDto
 
-    ngOnInit() {}
+    public projectStatus: typeof ProjectStatus
+
+    public externalLinkIcons = [
+        "fa fa-comments",
+        "fab fa-reddit",
+        "fab fa-twitter",
+        "fab fa-medium-m",
+        "fab fa-facebook",
+    ]
+
+    constructor(route: ActivatedRoute, cdr: ChangeDetectorRef) {
+        route.data.subscribe(data => {
+            this.project = data.project
+
+            cdr.markForCheck()
+        })
+
+        this.projectStatus = ProjectStatus
+    }
 }

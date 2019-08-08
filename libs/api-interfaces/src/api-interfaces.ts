@@ -16,3 +16,8 @@ export interface Project {
 export interface ProjectCategory {
     name: string
 }
+
+export enum ProjectStatus {
+    Live,
+    Down,
+}

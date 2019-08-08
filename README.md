@@ -27,6 +27,44 @@ Install dependencies
 npm install
 ```
 
+## Database
+
+Run the following script to set up the database for development
+
+```bash
+npm run db:init
+```
+
+During development, synchronise the db whenever you change an entity
+
+```bash
+npm run db:schema:sync
+```
+
+Before committing changes to an entity, generate a migration
+
+```bash
+npm run db:migration:generate
+```
+
+When pulling code, check to see if there's any changes to the schema
+
+```bash
+npm run db:schema:log
+```
+
+When ready, migrate to the latest schema
+
+```bash
+npm run db:migration:run
+```
+
+Revert a bad migration
+
+```bash
+npm run db:migration:revert
+```
+
 ## Development server
 
 Run `ng serve` for the Client dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.

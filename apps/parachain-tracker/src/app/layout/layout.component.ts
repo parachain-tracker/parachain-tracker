@@ -15,8 +15,9 @@ import { Component, OnInit } from "@angular/core"
                 <i class="medium"></i>
             </div>
         </nav>
-        <div style="height: 56px"></div>
-        <ng-content></ng-content>
+        <div class="content">
+            <ng-content></ng-content>
+        </div>
         <footer></footer>
     `,
 })
