@@ -6,6 +6,7 @@ import { Color, Label } from "ng2-charts"
     selector: "pt-ticker",
     template: `
         <canvas
+            #canvas
             class="chart"
             baseChart
             [datasets]="lineChartData"
@@ -21,10 +22,7 @@ import { Color, Label } from "ng2-charts"
 })
 export class TickerComponent implements OnInit {
     @Input()
-    public dataSeries: number[]
-
-    @Input()
-    public xAxisLabels: string[]
+    public dataSeries: { x: number; y: number }[]
 
     public lineChartData: ChartDataSets[]
     public lineChartLabels: Label[]
@@ -70,7 +68,16 @@ export class TickerComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.lineChartData = [{ data: this.dataSeries, fill: false }]
-        this.lineChartLabels = this.xAxisLabels
+        const { data, lineChartLabels } = this.dataSeries.reduce(
+            (acc, curr) => {
+                acc.lineChartLabels.push(curr.x)
+                acc.data.push(curr.y)
+                return acc
+            },
+            { data: [], lineChartLabels: [] },
+        )
+
+        this.lineChartData = [{ data, fill: false }]
+        this.lineChartLabels = lineChartLabels
     }
 }

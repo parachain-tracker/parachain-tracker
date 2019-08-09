@@ -21,3 +21,21 @@ export enum ProjectStatus {
     Live,
     Down,
 }
+
+export interface TickerCoord {
+    x: number
+    y: number
+}
+
+export interface TickerTrend {
+    label: string
+    value: number
+}
+
+export interface Paginated<T> {
+    items: T[]
+    itemsPerPage: number
+    from: number
+    to: number
+    totalItems: number
+}

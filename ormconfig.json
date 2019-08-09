@@ -5,7 +5,7 @@
     "migrationsRun": false,
     "database": "database/db.sqlite",
     "entities": ["apps/api/src/app/database/entity/*.ts"],
-    "migrations": ["apps/api/src/app/database/migration/*.js"],
+    "migrations": ["apps/api/src/app/database/migration/*.ts"],
     "subscribers": ["apps/api/src/app/database/subscriber/*.ts"],
     "cli": {
         "entitiesDir": "apps/api/src/app/database/entity",
