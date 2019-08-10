@@ -9,6 +9,9 @@ import { CategoryEntity } from "./database/entity/category.entity"
 import { ExternalLinkEntity } from "./database/entity/external-link.entity"
 import { TickerEntity } from "./database/entity/ticker.entity"
 import { TickerModule } from "./ticker/ticker.module"
+import { ScheduleModule } from "nest-schedule" 
+import { DynamicCronModule } from "./schedule/dynamic_cron.module"
+
 
 const ormconfig = require("../../../../ormconfig.json")
 
@@ -22,7 +25,7 @@ const connectionOptions: ConnectionOptions = {
 }
 
 @Module({
-    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule, TickerModule],
+    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule, TickerModule, ScheduleModule.register(), DynamicCronModule],
     controllers: [AppController],
     providers: [AppService],
 })
