@@ -1,4 +1,4 @@
-TODO: Add logo
+![ParachainTracker](https://i.imgur.com/52WmOBo.png)
 
 # Parachain Aggregation Platform
 
