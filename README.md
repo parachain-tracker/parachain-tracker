@@ -1,6 +1,6 @@
 ![ParachainTracker](https://i.imgur.com/52WmOBo.png)
 
-# Parachain Aggregation Platform
+# Polkadot Aggregation Platform
 
 Parachain tracker provides bird's eye view of Polkadot ecosystem. This is a community project to host developers who contribute to Polkadot ecosystem.
 
