@@ -1,0 +1,12 @@
+:host {
+  width: auto;
+  margin: 0 8px;
+}
+:host:first-child {
+  margin-left: 0;
+}
+:host:last-child {
+  margin-right: 0;
+}
+
+/*# sourceMappingURL=slide.component.css.map */

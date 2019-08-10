@@ -18,6 +18,7 @@ import { Component, OnInit } from "@angular/core"
         <div class="content">
             <ng-content></ng-content>
         </div>
+        <div></div>
         <footer></footer>
     `,
 })

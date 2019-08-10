@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
     selector: "pt-hero",
     template: `
         <div class="hero-wrapper">
-            <div class="hero-content">
+            <div>
                 <div class="hero-text">
                     <h1>Explore DApps and Parachains <br />on the Polkadot Network</h1>
                     <h2>
@@ -24,7 +24,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
                 <div class="hero-svg"></div>
             </div>
         </div>
-        <section></section>
     `,
     styleUrls: ["./hero.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
