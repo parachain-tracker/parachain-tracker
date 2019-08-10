@@ -1,32 +1,32 @@
 :host {
-  display: flex;
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 100%;
+    display: flex;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
 }
 
 .navigation {
-  width: 300px;
-  padding: 40px;
-  background: var(--pt-light-color);
+    width: 300px;
+    padding: 40px;
+    background: var(--pt-light-color);
 }
 .navigation > a {
-  display: block;
-  height: 40px;
-  font-size: 16px;
-  font-family: var(--pt-font-sans);
-  color: var(--pt-primary-color);
+    display: block;
+    height: 40px;
+    font-size: 16px;
+    font-family: var(--pt-font-sans);
+    color: var(--pt-primary-color);
 }
 .navigation > a.is-active {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .content {
-  width: 100%;
-  max-width: calc(100% - 300px);
-  overflow: hidden;
-  position: relative;
-  padding: 40px;
+    width: 100%;
+    max-width: calc(100% - 300px);
+    overflow: hidden;
+    position: relative;
+    padding: 40px;
 }
 
 /*# sourceMappingURL=sandbox.component.css.map */

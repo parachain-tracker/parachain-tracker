@@ -16,20 +16,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
                     </div>
                 </div>
             </div>
-            
-            
+
             <pt-slider class="featured-slider">
                 <pt-slide>
-                    <pt-project-tile [feature]="{rank: 1 }">
-                    </pt-project-tile>
+                    <pt-project-tile [feature]="{ rank: 1 }"> </pt-project-tile>
                 </pt-slide>
                 <pt-slide>
-                    <pt-project-tile [feature]="{rank: 2 }">
-                    </pt-project-tile>
+                    <pt-project-tile [feature]="{ rank: 2 }"> </pt-project-tile>
                 </pt-slide>
                 <pt-slide>
-                    <pt-project-tile [feature]="{rank: 3 }">
-                    </pt-project-tile>
+                    <pt-project-tile [feature]="{ rank: 3 }"> </pt-project-tile>
                 </pt-slide>
             </pt-slider>
         </section>
