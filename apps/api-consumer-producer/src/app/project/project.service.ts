@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common"
 import { google } from "googleapis"
 import { environment } from "../../environments/environment"
-import { Repository } from "typeorm"
+import { Repository, getConnection, Raw, MoreThan } from "typeorm"
 import { ProjectStatus } from "@parachain-tracker/api-interfaces"
 import { ProjectEntity } from "../../../../api/src/app/database/entity/project.entity"
 import { CategoryEntity } from "../../../../api/src/app/database/entity/category.entity"
@@ -212,7 +212,7 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                                 description: row[key_map["description"]] || "",
                                 developer: row[key_map["developer"]] || "",
                                 status: ProjectStatus[row[key_map["status"]]] || 0,
-                                category: row[key_map["category"]] || "",
+                                category: row[key_map["category"]] || "none",
                                 link: row[key_map["link"]] || "",
                                 commits: row[key_map["commits"]] || 0,
                                 stars: row[key_map["stars"]] || 0,
@@ -233,26 +233,34 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
     })
 }
 
-function checkCategory(category: Repository<CategoryEntity>, name: string) {
-    return category.findOne({ where: { name: name } })
-}
-
 function syncGoogleSheets(
     _category: Repository<CategoryEntity>,
-    project: Repository<ProjectEntity>,
+    _project: Repository<ProjectEntity>,
     auth: OAuth2Client,
     sheetID: string,
 ) {
     getSheet(auth, sheetID).then((sheet: Array<any>) => {
         Promise.all(
-            sheet.map(async row => {
-                let category = await checkCategory(_category, row.category)
+            sheet.map(async (row, i) => {
+                let category = await _category.findOne({ where: { name: row.category } })
                 if (category === void 0) {
                     category = await _category.save({ name: row.category })
                 }
-                row.categoryId = category.id
+
+                let project = await _project.findOne({ where: { name: row.name } })
                 delete row.category
-                project.save(row) // TODO this should update existing rather then add rows.
+
+                try {
+                    if (project === void 0) {
+                        row.categoryId = category.id
+                        await _project.save(row)
+                    } else {
+                        delete row.externalLinks
+                        await _project.update(project.id, row)
+                    }
+                } catch (e) {
+                    console.error("failed to refresh the table", e)
+                }
             }),
         )
     })
