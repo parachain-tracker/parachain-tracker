@@ -231,6 +231,61 @@
                     "styleext": "scss"
                 }
             }
+        },
+        "api-consumer-producer": {
+            "root": "apps/api-consumer-producer",
+            "sourceRoot": "apps/api-consumer-producer/src",
+            "projectType": "application",
+            "prefix": "api-consumer-producer",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api-consumer-producer",
+                        "main": "apps/api-consumer-producer/src/main.ts",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.app.json",
+                        "assets": ["apps/api-consumer-producer/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api-consumer-producer/src/environments/environment.ts",
+                                    "with": "apps/api-consumer-producer/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api-consumer-producer:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": [
+                            "apps/api-consumer-producer/tsconfig.app.json",
+                            "apps/api-consumer-producer/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/api-consumer-producer/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api-consumer-producer/jest.config.js",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.spec.json"
+                    }
+                }
+            }
         }
     },
     "cli": {
