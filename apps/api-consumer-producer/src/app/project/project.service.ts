@@ -206,8 +206,9 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
 
                 if (rows.length) {
                     resolve(
-                        rows.map(row => {
+                        rows.map((row, i) => {
                             return {
+                                id: i,
                                 name: row[key_map["name"]] || "",
                                 description: row[key_map["description"]] || "",
                                 developer: row[key_map["developer"]] || "",
@@ -247,7 +248,7 @@ function syncGoogleSheets(
                     category = await _category.save({ name: row.category })
                 }
 
-                let project = await _project.findOne({ where: { name: row.name } })
+                let project = await _project.findOne(i)
                 delete row.category
 
                 try {
@@ -255,8 +256,18 @@ function syncGoogleSheets(
                         row.categoryId = category.id
                         await _project.save(row)
                     } else {
-                        delete row.externalLinks
-                        await _project.update(project.id, row)
+                        if (project.externalLinks && row.externalLinks) {
+                            row.externalLinks = project.externalLinks.map(
+                                (link: { name: string; url: string }, i) => {
+                                    link.name = row.externalLinks[i].name
+                                    link.url = row.externalLinks[i].url
+                                    return link
+                                },
+                            )
+                        } else if (row.externalLinks) {
+                            project.externalLinks = row.externalLinks
+                        }
+                        await _project.save(row)
                     }
                 } catch (e) {
                     console.error("failed to refresh the table", e)

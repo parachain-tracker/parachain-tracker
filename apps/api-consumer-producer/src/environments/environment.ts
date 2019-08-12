@@ -3,6 +3,6 @@ export const environment = {
     mapSheetKeys: true,
     dontStoreToken: false,
     updateRate: 90000,
-    configPath: ".google_sheets.json",
+    configPath: ".google_sheets.staging.json",
     tokenPath: "token.json",
 }
