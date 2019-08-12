@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
-import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
+import { ProjectDto, ProjectStatus, TickerDto } from "@parachain-tracker/api-interfaces"
+import { map, switchMap } from "rxjs/operators"
+import { ApiService } from "../api/api.service"
+import { Observable } from "rxjs"
 
 @Component({
     selector: "pt-project",
     template: `
-        <div class="frame">
+        <div class="frame" *ngIf="(project$ | async) as project">
             <div class="banner" [style.background-image]="'url(/assets/projects/2/banner.jpg)'">
                 <div class="pill" *ngIf="project.network">
                     <div class="pill-icon"></div>
@@ -59,20 +62,20 @@ import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
                 <div class="stats">
                     <h2 class="section-heading">Trends</h2>
 
-                    <div class="stats-grid">
-                        <div class="stats-tile" *ngFor="let tile of tiles">
-                            <span class="stats-tile-title">Active Users</span>
-                            <div class="stats-tile-ticker"></div>
+                    <div class="stats-grid" *ngIf="(tickers$ | async) as tickers">
+                        <div class="stats-tile" *ngFor="let ticker of tickers">
+                            <span class="stats-tile-title">{{ ticker.name }}</span>
+
+                            <pt-ticker
+                                class="stats-tile-ticker"
+                                [dataSeries]="ticker.coords"
+                            ></pt-ticker>
 
                             <div class="stats-tile-data">
-                                <div class="stats-tile-key">Daily</div>
-                                <div class="stats-tile-value">102</div>
-
-                                <div class="stats-tile-key">Weekly</div>
-                                <div class="stats-tile-value">724</div>
-
-                                <div class="stats-tile-key">Monthly</div>
-                                <div class="stats-tile-value">5,634</div>
+                                <ng-container *ngFor="let trend of ticker.trends">
+                                    <div class="stats-tile-key">{{ trend.label }}</div>
+                                    <div class="stats-tile-value">{{ trend.value | number }}</div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
@@ -86,9 +89,11 @@ import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
 export class ProjectComponent {
     public tiles = [1, 2, 3]
 
-    public project: ProjectDto
+    public project$: Observable<ProjectDto>
 
     public projectStatus: typeof ProjectStatus
+
+    public tickers$: Observable<TickerDto[]>
 
     public externalLinkIcons = [
         "fa fa-comments",
@@ -98,12 +103,13 @@ export class ProjectComponent {
         "fab fa-facebook",
     ]
 
-    constructor(route: ActivatedRoute, cdr: ChangeDetectorRef) {
-        route.data.subscribe(data => {
-            this.project = data.project
+    constructor(route: ActivatedRoute, cdr: ChangeDetectorRef, api: ApiService) {
+        this.project$ = route.data.pipe(map(data => data.project))
 
-            cdr.markForCheck()
-        })
+        this.tickers$ = route.data.pipe(
+            switchMap(data => api.getTickers(data.project.id)),
+            map(result => result.items),
+        )
 
         this.projectStatus = ProjectStatus
     }
