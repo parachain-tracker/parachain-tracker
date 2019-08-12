@@ -40,7 +40,7 @@ export default class CreateDapps implements Seeder {
             let project = await factory(ProjectEntity)().make()
             const tickerFactory = factory(TickerEntity)
 
-            project.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
+            project.category = await factory(CategoryEntity)().make()
             project.externalLinks = randomLinks
 
             await em.save(project.category)

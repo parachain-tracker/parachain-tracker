@@ -44,4 +44,6 @@ export class ProjectDto {
     @ValidateNested()
     @Type(() => CategoryDto)
     public category?: CategoryDto
+
+    tagline
 }
