@@ -12,6 +12,8 @@ import { ExternalLinkEntity } from "../../../api/src/app/database/entity/externa
 
 const ormconfig = require("../../../../ormconfig.json")
 
+delete ormconfig.migrations
+
 const connectionOptions: ConnectionOptions = {
     ...ormconfig,
     entities: [ProjectEntity, CategoryEntity, ExternalLinkEntity],

@@ -40,7 +40,7 @@ export class ProjectEntity {
     @Column({ length: 32 })
     public network: string
 
-    @Column("text", { default: "a future project" })
+    @Column("text", { default: "" })
     public tagline: string
 
     @ManyToMany(type => ExternalLinkEntity, { cascade: true })

@@ -44,3 +44,4 @@ Thumbs.db
 credentials.json
 token.json
 .google_sheets.json
+.google_sheets.staging.json
