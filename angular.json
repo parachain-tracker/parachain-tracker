@@ -18,6 +18,8 @@
                         "aot": false,
                         "assets": [
                             "apps/parachain-tracker/src/browserconfig.xml",
+                            "apps/parachain-tracker/src/sitemap.xml",
+                            "apps/parachain-tracker/src/robots.txt",
                             "apps/parachain-tracker/src/site.webmanifest",
                             "apps/parachain-tracker/src/assets"
                         ],
