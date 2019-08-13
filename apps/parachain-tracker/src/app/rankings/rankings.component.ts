@@ -29,7 +29,11 @@ import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
                         >Name</cdk-header-cell
                     >
                     <cdk-cell class="table-cell" *cdkCellDef="let item">
-                        <img class="logo" src="/assets/projects/1/logo64@2x.png" alt="" />
+                        <img
+                            class="logo"
+                            src="/assets/projects/{{ item.project.id }}/logo64@2x.png"
+                            alt=""
+                        />
                         <span class="name">{{ item.project.name }}</span>
                         <span class="tagline">{{ item.project.tagline }}</span>
                     </cdk-cell>
