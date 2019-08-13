@@ -4,23 +4,37 @@ import { ProjectComponent } from "./project.component"
 import {
     ActivatedRouteSnapshot,
     Resolve,
+    Router,
     RouterModule,
     RouterStateSnapshot,
     Routes,
 } from "@angular/router"
-import { Observable } from "rxjs"
+import { EMPTY, Observable } from "rxjs"
 import { ApiService } from "../api/api.service"
 import { TickerModule } from "@parachain-tracker/components"
 import { PillModule } from "../../../../../libs/components/src/pill/pill.module"
+import { catchError, map, tap, throwIfEmpty } from "rxjs/operators"
 
 export class ProjectResolver implements Resolve<any> {
-    constructor(private api: ApiService) {}
+    constructor(private api: ApiService, private router: Router) {}
 
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<any> | Promise<any> | any {
-        return this.api.getProject(route.paramMap.get("id"))
+        return this.api.getProject(route.paramMap.get("id")).pipe(
+            tap(res => {
+                if (!res) {
+                    throw new Error("Project not found")
+                }
+            }),
+            catchError(e => {
+                console.error(e)
+                this.router.navigate(["/"])
+
+                return EMPTY
+            }),
+        )
     }
 }
 

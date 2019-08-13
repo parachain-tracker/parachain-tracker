@@ -28,6 +28,10 @@ const routes: Routes = [
         path: "rankings",
         loadChildren: "./rankings/rankings.module#RankingsModule",
     },
+    {
+        path: "**",
+        redirectTo: "/",
+    },
 ]
 
 @NgModule({
