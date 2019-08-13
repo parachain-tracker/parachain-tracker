@@ -17,7 +17,8 @@
                         "tsConfig": "apps/parachain-tracker/tsconfig.app.json",
                         "aot": false,
                         "assets": [
-                            "apps/parachain-tracker/src/favicon.ico",
+                            "apps/parachain-tracker/src/browserconfig.xml",
+                            "apps/parachain-tracker/src/site.webmanifest",
                             "apps/parachain-tracker/src/assets"
                         ],
                         "styles": [
