@@ -42,7 +42,7 @@ const routes: Routes = [
         BrowserModule.withServerTransition({ appId: "serverApp" }),
         HttpClientModule,
         EnvModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, { initialNavigation: "enabled" }),
         PrebootModule.withConfig({ appRoot: "pt-root" }),
         TransferHttpCacheModule,
     ],
