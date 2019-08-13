@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core"
-import { ProjectTile } from "@parachain-tracker/components"
 import { ActivatedRoute } from "@angular/router"
 import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
 
@@ -86,7 +85,6 @@ export class RankingsComponent {
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe(data => {
-            console.log(data)
             this.rankings = data.rankings
         })
     }
