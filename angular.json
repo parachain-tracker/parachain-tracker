@@ -10,7 +10,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/apps/parachain-tracker",
+                        "outputPath": "dist/browser",
                         "index": "apps/parachain-tracker/src/index.html",
                         "main": "apps/parachain-tracker/src/main.ts",
                         "polyfills": "apps/parachain-tracker/src/polyfills.ts",
@@ -92,6 +92,27 @@
                         "jestConfig": "apps/parachain-tracker/jest-angular.config.js",
                         "tsConfig": "apps/parachain-tracker/tsconfig.spec.json",
                         "setupFile": "apps/parachain-tracker/src/test-setup.ts"
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/server",
+                        "main": "apps/parachain-tracker/src/main.server.ts",
+                        "tsConfig": "apps/parachain-tracker/tsconfig.server.json",
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/parachain-tracker/src/styles"]
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/parachain-tracker/src/environments/environment.ts",
+                                    "with": "apps/parachain-tracker/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
                     }
                 }
             }

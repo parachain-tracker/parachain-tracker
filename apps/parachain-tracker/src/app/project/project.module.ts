@@ -9,11 +9,11 @@ import {
     RouterStateSnapshot,
     Routes,
 } from "@angular/router"
-import { EMPTY, Observable } from "rxjs"
+import { Observable, throwError } from "rxjs"
 import { ApiService } from "../api/api.service"
 import { TickerModule } from "@parachain-tracker/components"
 import { PillModule } from "../../../../../libs/components/src/pill/pill.module"
-import { catchError, map, tap, throwIfEmpty } from "rxjs/operators"
+import { catchError, tap } from "rxjs/operators"
 
 export class ProjectResolver implements Resolve<any> {
     constructor(private api: ApiService, private router: Router) {}
@@ -29,10 +29,8 @@ export class ProjectResolver implements Resolve<any> {
                 }
             }),
             catchError(e => {
-                console.error(e)
-                this.router.navigate(["/"])
-
-                return EMPTY
+                // this.router.navigate(["/"])
+                return throwError(e)
             }),
         )
     }
