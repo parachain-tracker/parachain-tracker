@@ -7,6 +7,7 @@ import { ApiService } from "../api/api.service"
 import { TickerModule } from "@parachain-tracker/components"
 import { forkJoin, Observable } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
+import { PillModule } from "../../../../../libs/components/src/pill/pill.module"
 
 @Injectable()
 export class ProjectRankingsResolver implements Resolve<any> {
@@ -15,13 +16,14 @@ export class ProjectRankingsResolver implements Resolve<any> {
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.api.getProjectRankings().pipe(
             map(projects =>
-                projects.map(({ id, name, tagline, category }, rank) => ({
+                projects.map(({ id, name, tagline, category, status }, rank) => ({
                     id,
                     name,
                     category,
                     tagline,
                     iconSrc: `/assets/project/${id}/logo64@2x.png`,
                     rank,
+                    status,
                 })),
             ),
             switchMap(projects =>
@@ -52,6 +54,7 @@ export class ProjectRankingsResolver implements Resolve<any> {
             },
         ]),
         TickerModule,
+        PillModule,
     ],
     providers: [ProjectRankingsResolver],
 })

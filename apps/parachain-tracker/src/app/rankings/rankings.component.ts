@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core"
 import { ProjectTile } from "@parachain-tracker/components"
 import { ActivatedRoute } from "@angular/router"
+import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
 
 @Component({
     selector: "pt-rankings",
@@ -10,9 +11,7 @@ import { ActivatedRoute } from "@angular/router"
 
             <cdk-table class="table" [dataSource]="rankings">
                 <ng-container cdkColumnDef="rank">
-                    <cdk-header-cell class="table-header-cell" *cdkHeaderCellDef
-                        >Rank</cdk-header-cell
-                    >
+                    <cdk-header-cell class="table-header-cell" *cdkHeaderCellDef>#</cdk-header-cell>
                     <cdk-cell class="table-cell table-cell-rank" *cdkCellDef="let item">
                         {{ item.project.rank + 1 }}
                     </cdk-cell>
@@ -41,20 +40,30 @@ import { ActivatedRoute } from "@angular/router"
                         Category
                     </cdk-header-cell>
                     <cdk-cell class="table-cell" *cdkCellDef="let item">
-                        <div class="pill" *ngIf="item.project.category">
-                            <div class="pill-icon"></div>
-                            <div class="pill-label">{{ item.project.category.name }}</div>
-                        </div>
+                        <pt-pill
+                            class="pill"
+                            *ngIf="item.project.category"
+                            [label]="item.project.category.name"
+                        ></pt-pill>
                     </cdk-cell>
+                </ng-container>
+
+                <ng-container cdkColumnDef="status">
+                    <cdk-header-cell class="table-header-cell" *cdkHeaderCellDef
+                        >Status</cdk-header-cell
+                    >
+                    <cdk-cell class="table-cell" *cdkCellDef="let item">{{
+                        projectStatus[item.project.status]
+                    }}</cdk-cell>
                 </ng-container>
 
                 <!-- Header and Row Declarations -->
                 <cdk-header-row
                     class="table-header"
-                    *cdkHeaderRowDef="['rank', 'ticker', 'name', 'category']"
+                    *cdkHeaderRowDef="['rank', 'ticker', 'name', 'category', 'status']"
                 ></cdk-header-row>
                 <ng-container
-                    *cdkRowDef="let item; columns: ['rank', 'ticker', 'name', 'category']"
+                    *cdkRowDef="let item; columns: ['rank', 'ticker', 'name', 'category', 'status']"
                 >
                     <a class="table-body" [routerLink]="['/project', item.project.id]">
                         <cdk-row class="table-row"></cdk-row>
@@ -67,7 +76,9 @@ import { ActivatedRoute } from "@angular/router"
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RankingsComponent {
-    public rankings: { project: ProjectTile; ticker: any[] }[]
+    public rankings: { project: ProjectDto; ticker: any[] }[]
+
+    public projectStatus = ProjectStatus
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe(data => {

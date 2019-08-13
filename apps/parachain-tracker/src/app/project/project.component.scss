@@ -50,6 +50,11 @@
     display: flex;
     width: 64px;
     height: 64px;
+
+    > img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .logo {
@@ -232,9 +237,7 @@
     height: 32px;
     padding: 0 16px 0 8px;
     margin: 0 8px;
-    color: #0fc92d;
     border-radius: 16px;
-    background-color: $light-color;
 
     &:before {
         content: "";
@@ -247,21 +250,4 @@
         border-radius: inherit;
         opacity: 0.5;
     }
-}
-
-.pill-icon {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    background: currentColor;
-}
-
-.pill-label {
-    text-indent: 8px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    color: $dark-color;
 }
