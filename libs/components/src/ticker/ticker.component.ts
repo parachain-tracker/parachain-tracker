@@ -1,6 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core"
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    Input,
+    OnInit,
+    PLATFORM_ID,
+} from "@angular/core"
 import { ChartDataSets, ChartOptions, ChartType } from "chart.js"
 import { Color, Label } from "ng2-charts"
+import { isPlatformServer } from "@angular/common"
 
 @Component({
     selector: "pt-ticker",
@@ -31,7 +40,11 @@ export class TickerComponent implements OnInit {
     public lineChartLegend: boolean
     public lineChartType: ChartType
 
-    constructor() {
+    constructor(cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) platformId: object) {
+        if (isPlatformServer(platformId)) {
+            cdr.detach()
+        }
+
         this.lineChartOptions = {
             responsive: true,
             animation: {

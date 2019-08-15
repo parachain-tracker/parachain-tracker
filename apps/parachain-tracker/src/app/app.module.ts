@@ -6,6 +6,8 @@ import { HttpClientModule } from "@angular/common/http"
 import { LayoutComponent } from "./layout/layout.component"
 import { EnvModule } from "../environments/environment"
 import { RouterModule, Routes } from "@angular/router"
+import { TransferHttpCacheModule } from "@nguniversal/common"
+import { PrebootModule } from "preboot"
 
 const routes: Routes = [
     {
@@ -36,7 +38,14 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [AppComponent, LayoutComponent],
-    imports: [BrowserModule, HttpClientModule, EnvModule, RouterModule.forRoot(routes)],
+    imports: [
+        BrowserModule.withServerTransition({ appId: "serverApp" }),
+        HttpClientModule,
+        EnvModule,
+        RouterModule.forRoot(routes, { initialNavigation: "enabled" }),
+        PrebootModule.withConfig({ appRoot: "pt-root" }),
+        TransferHttpCacheModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
