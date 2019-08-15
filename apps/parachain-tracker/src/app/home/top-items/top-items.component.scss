@@ -1,22 +1,23 @@
 @import "variables";
 
-.featured {
+.top-items {
+    margin-top: 48px;
     width: 100%;
-    height: 384px;
+    height: 820px;
     background: #ffffff;
 }
 
-.featured-title {
+.items-title {
     display: flex;
 }
 
-.featured-svg {
-    width: 18px;
+.top-parachains-svg {
+    width: 21px;
     height: 24px;
-    background: url("/assets/featured.svg");
+    background: url("/assets/top-parachains.svg");
 }
 
-.featured-txt {
+.items-txt {
     margin-left: 16px;
     margin-top: -8px;
     font-weight: lighter;
@@ -33,8 +34,9 @@
     margin-top: 48px;
 }
 
-.featured-slider {
+.items-slider {
     margin-top: 32px;
+    margin-bottom: 48px;
 }
 
 .view-all-svg {
@@ -53,4 +55,10 @@
     font-family: "Heiti TC";
     font-size: 14px;
     color: $primary-color;
+}
+
+.top-dapps-svg {
+    width: 24px;
+    height: 24px;
+    background: url("/assets/top-dapps.svg");
 }
