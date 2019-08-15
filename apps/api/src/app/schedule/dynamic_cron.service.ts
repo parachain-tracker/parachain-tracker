@@ -41,7 +41,7 @@ export class DynamicCronService implements OnModuleInit {
 
         const job_class = this.jobs.find(job => job.name === name)
         if (job_class) {
-            this.activeAPIJobs[name] = { job: new job_class(), remaining: !run ? run : "inf" }
+            this.activeAPIJobs[name] = { job: new job_class(), remaining: !!run ? run : "inf" }
         } else return false
 
         this.schedule.scheduleCronJob(name, cron, () => {

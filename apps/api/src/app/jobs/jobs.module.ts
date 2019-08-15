@@ -19,6 +19,7 @@ const JobProviders = [
 
 @Global()
 @Module({
+    imports: [],
     providers: JobProviders,
     exports: [TestJob, GithubJob, JOBS],
 })
