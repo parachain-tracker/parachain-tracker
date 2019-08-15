@@ -9,21 +9,22 @@ import { Observable } from "rxjs"
     selector: "pt-project",
     template: `
         <div class="frame" *ngIf="(project$ | async) as project">
-            <div class="banner" [style.background-image]="'url(/assets/projects/2/banner.jpg)'">
-                <div class="pill" *ngIf="project.network">
-                    <div class="pill-icon"></div>
-                    <div class="pill-label">{{ project.network }}</div>
-                </div>
-
-                <div class="pill" *ngIf="project.category">
-                    <div class="pill-icon"></div>
-                    <div class="pill-label">{{ project.category.name }}</div>
-                </div>
-
-                <div class="pill" *ngIf="project.status >= 0">
-                    <div class="pill-icon"></div>
-                    <div class="pill-label">{{ projectStatus[project.status] }}</div>
-                </div>
+            <div
+                class="banner"
+                style.background-image="url(/assets/projects/{{ project.id }}/banner.jpg)"
+            >
+                <pt-pill class="pill" *ngIf="project.network" [label]="project.network"></pt-pill>
+                <pt-pill
+                    class="pill"
+                    *ngIf="project.category"
+                    [label]="project.category.name"
+                ></pt-pill>
+                <pt-pill
+                    class="pill"
+                    *ngIf="project.status >= 0"
+                    [label]="projectStatus[project.status]"
+                    color="#0FC92D"
+                ></pt-pill>
             </div>
 
             <div class="header">
@@ -31,7 +32,11 @@ import { Observable } from "rxjs"
                     {{ project.developer }}
                 </p>
                 <div class="logo-frame">
-                    <img class="header-logo" src="/assets/projects/2/logo64@2x.png" alt="" />
+                    <img
+                        class="header-logo"
+                        src="/assets/projects/{{ project.id }}/logo64@2x.png"
+                        alt=""
+                    />
                 </div>
                 <h1 class="name">{{ project.name }}</h1>
                 <p class="tagline">A virtual world that runs on open standards.</p>
@@ -43,14 +48,11 @@ import { Observable } from "rxjs"
 
             <div class="detail">
                 <div class="social">
-                    <a
-                        class="social-link"
-                        *ngFor="let link of project.externalLinks; let index = index"
-                        [href]="link.url"
-                        target="_blank"
-                    >
-                        <i class="social-icon {{ externalLinkIcons[index] }}"></i>
-                    </a>
+                    <ng-container *ngFor="let link of project.externalLinks; let index = index">
+                        <a class="social-link" *ngIf="link" [href]="link.url" target="_blank">
+                            <i class="social-icon {{ externalLinkIcons[index] }}"></i>
+                        </a>
+                    </ng-container>
                 </div>
 
                 <div class="description">

@@ -34,6 +34,9 @@ export class TickerComponent implements OnInit {
     constructor() {
         this.lineChartOptions = {
             responsive: true,
+            animation: {
+                duration: 0,
+            },
             scales: {
                 xAxes: [
                     {

@@ -16,6 +16,22 @@ const routes: Routes = [
         path: "project/:id",
         loadChildren: "./project/project.module#ProjectModule",
     },
+    {
+        path: "collections/featured",
+        loadChildren: "./collections/featured/featured.module#FeaturedModule",
+    },
+    {
+        path: "collections",
+        loadChildren: "./collections/collections.module#CollectionsModule",
+    },
+    {
+        path: "rankings",
+        loadChildren: "./rankings/rankings.module#RankingsModule",
+    },
+    {
+        path: "**",
+        redirectTo: "/",
+    },
 ]
 
 @NgModule({
