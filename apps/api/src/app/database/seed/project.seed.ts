@@ -4,6 +4,7 @@ import { ProjectEntity } from "../entity/project.entity"
 import { CategoryEntity } from "../entity/category.entity"
 import { ExternalLinkEntity } from "../entity/external-link.entity"
 import * as faker from "faker"
+import { TickerEntity } from "../entity/ticker.entity"
 
 const links = ["twitter", "medium", "reddit", "facebook", "chat"]
 
@@ -36,12 +37,36 @@ export default class CreateDapps implements Seeder {
 
         await times(10, async n => {
             const randomLinks = getRandomSubarray(linkEntities, linkCount)
-            const project = await factory(ProjectEntity)().make()
+            let project = await factory(ProjectEntity)().make()
+            const tickerFactory = factory(TickerEntity)
+
             project.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
             project.externalLinks = randomLinks
 
             await em.save(project.category)
-            await em.save(project)
+
+            project = await em.save(project)
+
+            const tickers = [
+                await tickerFactory({ name: "Users", labels: ["1d", "7d", "30d"], project }).make(),
+                await tickerFactory({
+                    name: "Transactions",
+                    labels: ["1d", "7d", "30d"],
+                    project,
+                }).make(),
+                await tickerFactory({
+                    name: "Volume (DAI)",
+                    labels: ["1d", "7d", "30d"],
+                    project,
+                }).make(),
+                await tickerFactory({
+                    name: "Developer Activity",
+                    labels: ["30d", "90d"],
+                    project,
+                }).make(),
+            ]
+
+            await em.save(tickers)
         })
     }
 }
