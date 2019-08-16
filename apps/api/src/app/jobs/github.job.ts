@@ -15,17 +15,18 @@ export class GithubJob implements Job {
         const projectsRepo = getRepository(ProjectEntity)
         const projects = await projectsRepo.find({ relations: ["externalLinks"]})
         const headers = {
-            'Authorization': `Basic ${Buffer.from('will be filled from env').toString('base64')}`,
+            'Authorization': `Basic ${Buffer.from(`${process.env.GITHUB_API_AUTH_ID}:${process.env.GITHUB_API_AUTH_PW}`).toString('base64')}`,
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         }
         for (let i = 0; i < projects.length; i++) {
             let github_repo = projects[i].externalLinks.find(link => link.url.includes('github.com'))
             if (github_repo) {
-                github_repo = github_repo.url.slice(github_repo.indexOf('github.com') + 11)
+                github_repo = github_repo.url.slice(github_repo.url.indexOf('github.com') + 11)
                 setTimeout(async () => {
                     try {
                         let res = await this.httpService.get(`https://api.github.com/repos/${github_repo}/commits`, {headers}).toPromise()
+                        console.log(res.headers)
                         const items_per_page = res.data.length
                         const { last } = parse(res.headers.link)
 

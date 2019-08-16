@@ -87,6 +87,7 @@
     "@nrwl/nest": "8.4.3",
     "@nrwl/node": "8.4.3",
     "@nrwl/workspace": "8.4.3",
+    "@types/dotenv": "6.1.1",
     "@types/jest": "24.0.16",
     "@types/node": "12.6.9",
     "codelyzer": "5.1.0",
