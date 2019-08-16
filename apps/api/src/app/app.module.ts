@@ -13,6 +13,8 @@ import { ScheduleModule } from "nest-schedule"
 import { DynamicCronModule } from "./schedule/dynamic_cron.module"
 import { JobsModule } from "./jobs/jobs.module"
 import { environment } from "../environments/environment"
+import { RankingModule } from "./ranking/ranking.module"
+import { FeaturedModule } from "./featured/featured.module"
 
 const path = require("path")
 const ormconfig = require("../../../../ormconfig.json")
@@ -35,6 +37,8 @@ if (!environment.production) {
         TypeOrmModule.forRoot(connectionOptions),
         ProjectModule,
         TickerModule,
+        RankingModule,
+        FeaturedModule,
         JobsModule,
         ScheduleModule.register(),
         DynamicCronModule,

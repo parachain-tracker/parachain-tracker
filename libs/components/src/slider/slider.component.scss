@@ -1,7 +1,15 @@
 @import "mixins";
 
 :host {
-    display: block;
+    display: flex;
     position: relative;
     height: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+::ng-deep {
+    .flickity-viewport {
+        flex: 1;
+    }
 }

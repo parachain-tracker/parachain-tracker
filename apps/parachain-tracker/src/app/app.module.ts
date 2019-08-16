@@ -43,7 +43,7 @@ const routes: Routes = [
         HttpClientModule,
         EnvModule,
         RouterModule.forRoot(routes, { initialNavigation: "enabled" }),
-        PrebootModule.withConfig({ appRoot: "pt-root" }),
+        // PrebootModule.withConfig({ appRoot: "pt-root" }),
         TransferHttpCacheModule,
     ],
     providers: [],

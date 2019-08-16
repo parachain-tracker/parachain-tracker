@@ -15,9 +15,9 @@ import { ProjectTile } from "./interfaces"
             <h3 class="name" [innerHTML]="feature.name"></h3>
             <p class="tagline" [innerHTML]="feature.tagline"></p>
             <div class="category" *ngIf="feature.category" [innerText]="feature.category"></div>
-            <div class="users" *ngIf="feature.users >= 0">
+            <div class="users" *ngIf="feature.stars >= 0">
                 <i class="users-icon fas fa-eye"></i>
-                <span class="users-count" [innerText]="feature.users | number"></span>
+                <span class="users-count" [innerText]="feature.stars | number"></span>
             </div>
         </div>
     `,

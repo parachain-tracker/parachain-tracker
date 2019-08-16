@@ -4,17 +4,19 @@ import { RankingsComponent } from "./rankings.component"
 import { ActivatedRouteSnapshot, Resolve, RouterModule, RouterStateSnapshot } from "@angular/router"
 import { CdkTableModule } from "@angular/cdk/table"
 import { ApiService } from "../api/api.service"
-import { TickerModule } from "@parachain-tracker/components"
+import { PillModule, TickerModule } from "@parachain-tracker/components"
 import { forkJoin, Observable } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
-import { PillModule } from "../../../../../libs/components/src/pill/pill.module"
+import { ProjectType } from "@parachain-tracker/api-interfaces"
 
 @Injectable()
 export class ProjectRankingsResolver implements Resolve<any> {
     constructor(private api: ApiService) {}
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        return this.api.getProjectRankings().pipe(
+        const type = (route.paramMap.get("type") as unknown) as ProjectType
+
+        return this.api.getProjectRankings({ type }).pipe(
             map(projects =>
                 projects.map(({ id, name, tagline, category, status }, rank) => ({
                     id,
@@ -46,7 +48,7 @@ export class ProjectRankingsResolver implements Resolve<any> {
         CdkTableModule,
         RouterModule.forChild([
             {
-                path: "",
+                path: ":type",
                 component: RankingsComponent,
                 resolve: {
                     rankings: ProjectRankingsResolver,

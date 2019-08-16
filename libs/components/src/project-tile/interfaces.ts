@@ -4,7 +4,7 @@ export interface ProjectTile {
     tagline: string
     iconSrc: string
     rank?: number
-    users?: number
+    stars?: number
     category?: string
 }
 

@@ -6,7 +6,7 @@ import { ExternalLinkEntity } from "../entity/external-link.entity"
 import * as faker from "faker"
 import { TickerEntity } from "../entity/ticker.entity"
 
-const links = ["twitter", "medium", "reddit", "facebook", "chat"]
+const links = ["twitter", "medium", "reddit", "telegram", "riot"]
 
 function getRandomSubarray(arr, size) {
     const shuffled = arr.slice(0)

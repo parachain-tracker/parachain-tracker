@@ -37,12 +37,12 @@ body {
     font-family: "Futura Light BT";
     font-style: normal;
     font-weight: normal;
-    src: local("Futura Light BT"), url("assets/Futura Light BT.woff") format("woff");
+    src: local("Futura Light BT"), url("assets/fonts/Futura Light BT.woff") format("woff");
 }
 
 @font-face {
-    font-family: "Futura MdCn BT";
+    font-family: "Futura Md BT Medium";
     font-style: normal;
     font-weight: normal;
-    src: url("assets/FuturaMediumCondensedBT.ttf");
+    src: local("Futura Md BT Medium"), url("assets/fonts/futuram.woff") format("woff");
 }

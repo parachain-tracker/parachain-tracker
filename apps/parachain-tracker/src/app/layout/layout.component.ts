@@ -5,14 +5,16 @@ import { Component, OnInit } from "@angular/core"
     styleUrls: ["./layout.component.scss"],
     template: `
         <nav>
-            <h1>ParachainTracker</h1>
-            <div class="submit-project">
+            <a class="heading" routerLink="/">
+                <h1>ParachainTracker</h1>
+            </a>
+            <a href="#" class="submit-project">
                 <h3>SUBMIT A PROJECT</h3>
-            </div>
+            </a>
             <div class="social">
-                <i class="reddit"></i>
-                <i class="twitter"></i>
-                <i class="medium"></i>
+                <a href="#"><i class="reddit"></i></a>
+                <a href="#"><i class="twitter"></i></a>
+                <a href="#"><i class="medium"></i></a>
             </div>
         </nav>
         <div class="content">

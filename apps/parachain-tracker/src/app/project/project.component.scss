@@ -147,6 +147,15 @@
     color: $accent-color;
 }
 
+.riot {
+    display: inline-block;
+    font-size: 0;
+    width: 24px;
+    height: 27px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .description {
     grid-area: description;
     padding: 32px 32px 0 56px;
