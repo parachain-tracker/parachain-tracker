@@ -11,7 +11,7 @@ import { ActivatedRoute } from "@angular/router"
                     <div class="top-parachains-svg"></div>
                     <h3 class="items-txt">Top Parachains</h3>
                 </div>
-                <a [routerLink]="['/rankings']" class="view-all">
+                <a [routerLink]="['/rankings', 'parachain']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
                         <h3>view all</h3>
@@ -31,12 +31,12 @@ import { ActivatedRoute } from "@angular/router"
                     <div class="top-dapps-svg"></div>
                     <h3 class="items-txt">Top Dapps</h3>
                 </div>
-                <div class="view-all">
+                <a [routerLink]="['/rankings', 'dapp']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
                         <h3>view all</h3>
                     </div>
-                </div>
+                </a>
             </div>
 
             <pt-slider class="items-slider">

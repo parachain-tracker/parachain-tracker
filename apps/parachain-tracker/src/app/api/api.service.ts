@@ -38,9 +38,11 @@ export class ApiService {
     }
 
     public getProjectRankings(query: RankingSearchDto): Observable<ProjectDto[]> {
-        const params = new HttpParams()
-            .set("limit", query.limit.toString())
-            .set("type", query.type.toString())
+        let params = new HttpParams().set("type", query.type.toString())
+
+        if (query.limit) {
+            params = params.set("limit", query.limit.toString())
+        }
 
         return this.http.get<ProjectDto[]>(`/api/ranking`, {
             params,

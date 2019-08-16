@@ -23,8 +23,8 @@ export enum ProjectStatus {
 }
 
 export enum ProjectType {
-    Dapp,
-    Parachain,
+    dapp,
+    parachain,
 }
 
 export interface TickerCoord {

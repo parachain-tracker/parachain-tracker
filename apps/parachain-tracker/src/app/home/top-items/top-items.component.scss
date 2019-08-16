@@ -22,7 +22,7 @@
     margin-left: 16px;
     margin-top: -8px;
     font-weight: lighter;
-    font-family: "Futura Light BT";
+    font-family: var(--pt-font-futura-lt);
     font-size: 32px;
 }
 
@@ -36,8 +36,8 @@
 }
 
 .items-slider {
-    margin-top: 32px;
-    margin-bottom: 48px;
+    margin: 32px 56px 48px;
+    width: calc(100% - 112px);
 }
 
 .view-all-svg {
@@ -53,7 +53,7 @@
     height: 16px;
     position: relative;
     align-items: center;
-    font-family: "Heiti TC";
+    font-family: var(--pt-font-sans);
     font-size: 14px;
     text-decoration: none;
     color: $primary-color;

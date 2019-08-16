@@ -19,7 +19,7 @@ export class TopParachainsResolver implements Resolve<ProjectTile[]> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<ProjectTile[]> {
-        return this.api.getProjectRankings({ limit: 10, type: ProjectType.Parachain }).pipe(
+        return this.api.getProjectRankings({ limit: 10, type: ProjectType.parachain }).pipe(
             map(projects =>
                 projects.map(({ id, name, tagline, stars }, index) => ({
                     id,
@@ -39,7 +39,7 @@ export class TopDappsResolver implements Resolve<ProjectTile[]> {
     constructor(private api: ApiService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ProjectTile[]> {
-        return this.api.getProjectRankings({ limit: 10, type: ProjectType.Dapp }).pipe(
+        return this.api.getProjectRankings({ limit: 10, type: ProjectType.dapp }).pipe(
             map(projects =>
                 projects.map(({ id, name, tagline, stars }, index) => ({
                     id,

@@ -3,23 +3,27 @@ import { ProjectType, RankingSearchDto } from "@parachain-tracker/api-interfaces
 import { InjectRepository } from "@nestjs/typeorm"
 import { ProjectEntity } from "../database/entity/project.entity"
 import { Repository, SelectQueryBuilder } from "typeorm"
+import { CategoryEntity } from "../database/entity/category.entity"
 
 @Injectable()
 export class RankingService {
-    private query: SelectQueryBuilder<ProjectEntity>
+    constructor(@InjectRepository(ProjectEntity) private project: Repository<ProjectEntity>) {}
 
-    constructor(@InjectRepository(ProjectEntity) private project: Repository<ProjectEntity>) {
-        this.query = this.project.createQueryBuilder("project")
-    }
-
-    public topProjects(query: RankingSearchDto) {
+    public topProjects(search: RankingSearchDto) {
         const type =
-            typeof ProjectType[query.type] === "string" ? query.type : ProjectType[query.type]
-        return this.query
+            typeof ProjectType[search.type] === "string" ? search.type : ProjectType[search.type]
+
+        let query = this.project
+            .createQueryBuilder("project")
             .where("project.type = :type", { type })
             .addOrderBy("project.stars", "DESC")
             .addOrderBy("project.commits", "DESC")
-            .limit(parseInt(query.limit, 10))
-            .getMany()
+            .leftJoinAndSelect("project.category", "category")
+
+        if (search.limit) {
+            query = query.limit(parseInt(search.limit.toString(), 10))
+        }
+
+        return query.getMany()
     }
 }
