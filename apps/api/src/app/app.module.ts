@@ -9,7 +9,12 @@ import { CategoryEntity } from "./database/entity/category.entity"
 import { ExternalLinkEntity } from "./database/entity/external-link.entity"
 import { TickerEntity } from "./database/entity/ticker.entity"
 import { TickerModule } from "./ticker/ticker.module"
+import { ScheduleModule } from "nest-schedule"
+import { DynamicCronModule } from "./schedule/dynamic_cron.module"
+import { JobsModule } from "./jobs/jobs.module"
+import { environment } from "../environments/environment"
 
+const path = require("path")
 const ormconfig = require("../../../../ormconfig.json")
 
 // Run migrations from CLI, this line prevents compile error because TypeORM
@@ -21,8 +26,19 @@ const connectionOptions: ConnectionOptions = {
     entities: [ProjectEntity, CategoryEntity, ExternalLinkEntity, TickerEntity],
 }
 
+if (!environment.production) {
+    require("dotenv").config({ path: path.resolve(__dirname, "../../../apps/api/.env") })
+}
+
 @Module({
-    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule, TickerModule],
+    imports: [
+        TypeOrmModule.forRoot(connectionOptions),
+        ProjectModule,
+        TickerModule,
+        JobsModule,
+        ScheduleModule.register(),
+        DynamicCronModule,
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
