@@ -1,8 +1,9 @@
 @import "variables";
 
 .top-items {
-    margin-top: 48px;
     width: 100%;
+    max-width: $max-frame-width;
+    margin: 48px auto 0;
     height: 820px;
     background: #ffffff;
 }
@@ -54,6 +55,7 @@
     align-items: center;
     font-family: "Heiti TC";
     font-size: 14px;
+    text-decoration: none;
     color: $primary-color;
 }
 

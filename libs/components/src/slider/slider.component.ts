@@ -33,6 +33,7 @@ export class SliderComponent implements AfterViewInit {
                 freeScroll: true,
                 groupCells: true,
                 pageDots: false,
+                prevNextButtons: false,
             })
         }
     }

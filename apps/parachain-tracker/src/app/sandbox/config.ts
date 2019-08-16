@@ -25,7 +25,7 @@ export const components: Routes = [
                 name: "WeWork",
                 rank: 1,
                 tagline: "It just works.",
-                users: 2340,
+                stars: 2340,
             },
         },
     },

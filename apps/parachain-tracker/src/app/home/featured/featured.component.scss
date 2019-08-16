@@ -2,6 +2,8 @@
 
 .featured {
     width: 100%;
+    max-width: $max-frame-width;
+    margin: 0 auto;
     height: 384px;
     background: #ffffff;
 }
@@ -51,6 +53,7 @@
     position: relative;
     align-items: center;
     font-family: "Heiti TC";
+    text-decoration: none;
     font-size: 14px;
     color: $primary-color;
 }

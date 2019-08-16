@@ -22,6 +22,11 @@ export enum ProjectStatus {
     Down,
 }
 
+export enum ProjectType {
+    Dapp,
+    Parachain,
+}
+
 export interface TickerCoord {
     x: number
     y: number

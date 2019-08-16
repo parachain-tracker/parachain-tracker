@@ -9,6 +9,8 @@ import { CategoryEntity } from "./database/entity/category.entity"
 import { ExternalLinkEntity } from "./database/entity/external-link.entity"
 import { TickerEntity } from "./database/entity/ticker.entity"
 import { TickerModule } from "./ticker/ticker.module"
+import { RankingModule } from "./ranking/ranking.module"
+import { FeaturedModule } from "./featured/featured.module"
 
 const ormconfig = require("../../../../ormconfig.json")
 
@@ -22,7 +24,13 @@ const connectionOptions: ConnectionOptions = {
 }
 
 @Module({
-    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule, TickerModule],
+    imports: [
+        TypeOrmModule.forRoot(connectionOptions),
+        ProjectModule,
+        TickerModule,
+        RankingModule,
+        FeaturedModule,
+    ],
     controllers: [AppController],
     providers: [AppService],
 })

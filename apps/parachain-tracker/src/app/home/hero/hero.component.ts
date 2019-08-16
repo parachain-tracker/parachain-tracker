@@ -19,7 +19,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
                         <div class="goto"></div>
                         <a href="" class="hero-link">Learn more about Parachains</a>
                     </div>
-                    <button class="goto-button"><p>View Dapps & Parachains</p></button>
+                    <button [routerLink]="['/collections/featured']" class="goto-button">
+                        <p>View Dapps & Parachains</p>
+                    </button>
                 </div>
                 <div class="hero-svg"></div>
             </div>

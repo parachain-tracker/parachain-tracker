@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
+import { ChangeDetectionStrategy, Component } from "@angular/core"
+import { ProjectTile } from "@parachain-tracker/components"
+import { ActivatedRoute } from "@angular/router"
 
 @Component({
     selector: "pt-top-items",
@@ -9,23 +11,19 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
                     <div class="top-parachains-svg"></div>
                     <h3 class="items-txt">Top Parachains</h3>
                 </div>
-                <div class="view-all">
+                <a [routerLink]="['/rankings']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
                         <h3>view all</h3>
                     </div>
-                </div>
+                </a>
             </div>
 
             <pt-slider class="items-slider">
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 1 }"> </pt-project-tile>
-                </pt-slide>
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 2 }"> </pt-project-tile>
-                </pt-slide>
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 3 }"> </pt-project-tile>
+                <pt-slide *ngFor="let project of parachains">
+                    <a [routerLink]="['project', project.id]">
+                        <pt-project-tile [feature]="project"></pt-project-tile>
+                    </a>
                 </pt-slide>
             </pt-slider>
             <div class="title">
@@ -42,14 +40,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
             </div>
 
             <pt-slider class="items-slider">
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 1 }"> </pt-project-tile>
-                </pt-slide>
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 2 }"> </pt-project-tile>
-                </pt-slide>
-                <pt-slide>
-                    <pt-project-tile [feature]="{ rank: 3 }"> </pt-project-tile>
+                <pt-slide *ngFor="let project of dapps">
+                    <a [routerLink]="['project', project.id]">
+                        <pt-project-tile [feature]="project"></pt-project-tile>
+                    </a>
                 </pt-slide>
             </pt-slider>
         </section>
@@ -57,8 +51,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
     styleUrls: ["./top-items.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TopItemsComponent implements OnInit {
-    constructor() {}
+export class TopItemsComponent {
+    public parachains: ProjectTile[]
+    public dapps: ProjectTile[]
 
-    ngOnInit() {}
+    constructor(route: ActivatedRoute) {
+        this.parachains = route.snapshot.data.parachains
+        this.dapps = route.snapshot.data.dapps
+    }
 }

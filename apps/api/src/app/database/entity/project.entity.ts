@@ -8,13 +8,19 @@ import {
     PrimaryGeneratedColumn,
 } from "typeorm"
 import { CategoryEntity } from "./category.entity"
-import { ProjectStatus } from "@parachain-tracker/api-interfaces"
+import { ProjectStatus, ProjectType } from "@parachain-tracker/api-interfaces"
 import { ExternalLinkEntity } from "./external-link.entity"
 
 @Entity("Project")
 export class ProjectEntity {
     @PrimaryGeneratedColumn()
     public id: number
+
+    @Column("int", { default: 0 })
+    public type: ProjectType
+
+    @Column("tinyint", { default: false })
+    public featured: boolean
 
     @Column({ length: 256 })
     public name: string

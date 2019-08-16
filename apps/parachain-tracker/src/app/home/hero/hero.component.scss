@@ -1,13 +1,20 @@
+@import "variables";
+
+:host {
+    display: block;
+    background: linear-gradient(295.35deg, #a644c9 0%, #e6007a 48.62%);
+}
+
 .hero-wrapper {
     position: relative;
     width: 100%;
+    max-width: $max-frame-width;
+    margin: 0 auto;
     height: 616px;
     left: 0;
     top: 0;
     display: flex;
-    justify-content: center;
     overflow: hidden;
-    background: linear-gradient(295.35deg, #a644c9 0%, #e6007a 48.62%);
 }
 
 .hero-txt {
@@ -17,11 +24,11 @@
 .hero-svg {
     /* Logos */
 
-    position: relative;
-    left: 400px;
-    top: -360px;
-    width: 652px;
-    height: 423px;
+    position: absolute;
+    right: 0;
+    top: 180px;
+    width: 50vw;
+    height: calc(652 / 453 * 50vw);
     background: url("/assets/Logos.svg") no-repeat;
 }
 
