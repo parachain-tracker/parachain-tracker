@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm"
 
-export class CreateDatabase1565519799352 implements MigrationInterface {
+export class CreateDatabase1565974595714 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(
             `CREATE TABLE "Category" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(32) NOT NULL)`,
@@ -9,7 +9,7 @@ export class CreateDatabase1565519799352 implements MigrationInterface {
             `CREATE TABLE "ExternalLink" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(32) NOT NULL, "url" text NOT NULL)`,
         )
         await queryRunner.query(
-            `CREATE TABLE "Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"))`,
+            `CREATE TABLE "Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "tagline" text NOT NULL DEFAULT (''), "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"))`,
         )
         await queryRunner.query(
             `CREATE TABLE "Ticker" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(32) NOT NULL, "project_id" integer NOT NULL, "coords" text NOT NULL, "trends" text NOT NULL)`,
@@ -24,10 +24,10 @@ export class CreateDatabase1565519799352 implements MigrationInterface {
             `CREATE INDEX "IDX_0353ceafa0ddbe7468282be58d" ON "project_external_links__external_link" ("externalLinkId") `,
         )
         await queryRunner.query(
-            `CREATE TABLE "temporary_Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"), CONSTRAINT "FK_af6d1f6d7ab25b4fa6a1a68447c" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`,
+            `CREATE TABLE "temporary_Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "tagline" text NOT NULL DEFAULT (''), "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"), CONSTRAINT "FK_af6d1f6d7ab25b4fa6a1a68447c" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION)`,
         )
         await queryRunner.query(
-            `INSERT INTO "temporary_Project"("id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "categoryId") SELECT "id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "categoryId" FROM "Project"`,
+            `INSERT INTO "temporary_Project"("id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "tagline", "categoryId") SELECT "id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "tagline", "categoryId" FROM "Project"`,
         )
         await queryRunner.query(`DROP TABLE "Project"`)
         await queryRunner.query(`ALTER TABLE "temporary_Project" RENAME TO "Project"`)
@@ -88,10 +88,10 @@ export class CreateDatabase1565519799352 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "temporary_Ticker"`)
         await queryRunner.query(`ALTER TABLE "Project" RENAME TO "temporary_Project"`)
         await queryRunner.query(
-            `CREATE TABLE "Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"))`,
+            `CREATE TABLE "Project" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(256) NOT NULL, "developer" varchar(256) NOT NULL, "description" text NOT NULL, "status" integer NOT NULL, "link" text NOT NULL, "stars" integer NOT NULL, "commits" integer NOT NULL, "network" varchar(32) NOT NULL, "tagline" text NOT NULL DEFAULT (''), "categoryId" integer, CONSTRAINT "REL_af6d1f6d7ab25b4fa6a1a68447" UNIQUE ("categoryId"))`,
         )
         await queryRunner.query(
-            `INSERT INTO "Project"("id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "categoryId") SELECT "id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "categoryId" FROM "temporary_Project"`,
+            `INSERT INTO "Project"("id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "tagline", "categoryId") SELECT "id", "name", "developer", "description", "status", "link", "stars", "commits", "network", "tagline", "categoryId" FROM "temporary_Project"`,
         )
         await queryRunner.query(`DROP TABLE "temporary_Project"`)
         await queryRunner.query(`DROP INDEX "IDX_0353ceafa0ddbe7468282be58d"`)
