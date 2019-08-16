@@ -10,14 +10,17 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/apps/parachain-tracker",
+                        "outputPath": "dist/browser",
                         "index": "apps/parachain-tracker/src/index.html",
                         "main": "apps/parachain-tracker/src/main.ts",
                         "polyfills": "apps/parachain-tracker/src/polyfills.ts",
                         "tsConfig": "apps/parachain-tracker/tsconfig.app.json",
                         "aot": false,
                         "assets": [
-                            "apps/parachain-tracker/src/favicon.ico",
+                            "apps/parachain-tracker/src/browserconfig.xml",
+                            "apps/parachain-tracker/src/sitemap.xml",
+                            "apps/parachain-tracker/src/robots.txt",
+                            "apps/parachain-tracker/src/site.webmanifest",
                             "apps/parachain-tracker/src/assets"
                         ],
                         "styles": [
@@ -91,6 +94,27 @@
                         "jestConfig": "apps/parachain-tracker/jest-angular.config.js",
                         "tsConfig": "apps/parachain-tracker/tsconfig.spec.json",
                         "setupFile": "apps/parachain-tracker/src/test-setup.ts"
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/server",
+                        "main": "apps/parachain-tracker/src/main.server.ts",
+                        "tsConfig": "apps/parachain-tracker/tsconfig.server.json",
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/parachain-tracker/src/styles"]
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/parachain-tracker/src/environments/environment.ts",
+                                    "with": "apps/parachain-tracker/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
                     }
                 }
             }
@@ -229,6 +253,61 @@
             "schematics": {
                 "@nrwl/angular:component": {
                     "styleext": "scss"
+                }
+            }
+        },
+        "api-consumer-producer": {
+            "root": "apps/api-consumer-producer",
+            "sourceRoot": "apps/api-consumer-producer/src",
+            "projectType": "application",
+            "prefix": "api-consumer-producer",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api-consumer-producer",
+                        "main": "apps/api-consumer-producer/src/main.ts",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.app.json",
+                        "assets": ["apps/api-consumer-producer/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api-consumer-producer/src/environments/environment.ts",
+                                    "with": "apps/api-consumer-producer/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api-consumer-producer:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": [
+                            "apps/api-consumer-producer/tsconfig.app.json",
+                            "apps/api-consumer-producer/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/api-consumer-producer/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api-consumer-producer/jest.config.js",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.spec.json"
+                    }
                 }
             }
         }

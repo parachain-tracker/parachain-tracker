@@ -1,0 +1,49 @@
+@import "variables";
+
+:host {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    background: $light-color;
+    font-family: var(--pt-font-sans);
+}
+
+.frame {
+    width: 100%;
+    flex: 1;
+    margin: 0 auto;
+    padding: 40px 56px 80px;
+    max-width: $max-frame-width;
+    box-shadow: 0 4px 8px rgba(103, 14, 53, 0.1), 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.heading {
+    margin: 0 0 16px;
+    font-family: var(--pt-font-futura-lt);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 24px;
+}
+
+.description {
+    margin: 16px 0 32px;
+    font-family: var(--pt-font-sans);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.grid {
+    display: grid;
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+    grid-template-columns: repeat(auto-fill, 232px);
+}
+
+.grid-tile {
+    color: inherit;
+    cursor: pointer;
+}

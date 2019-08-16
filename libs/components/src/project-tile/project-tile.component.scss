@@ -119,12 +119,18 @@
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 19px;
+    line-height: 1.22;
     color: var(--color);
+    max-height: calc(1em * 1.22);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tagline {
     margin: 8px 16px;
+    line-height: 1.22;
+    max-height: calc(2em * 1.22);
+    overflow: hidden;
 }
 
 %tile-footer {
