@@ -26,7 +26,6 @@ export class GithubJob implements Job {
                 setTimeout(async () => {
                     try {
                         let res = await this.httpService.get(`https://api.github.com/repos/${github_repo}/commits`, {headers}).toPromise()
-                        console.log(res.headers)
                         const items_per_page = res.data.length
                         const { last } = parse(res.headers.link)
 

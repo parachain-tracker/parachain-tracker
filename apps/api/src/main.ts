@@ -17,7 +17,9 @@ async function bootstrap() {
             forbidNonWhitelisted: true,
         }),
     )
+        
     const port = process.env.port || 3333
+
     await app.listen(port, () => {
         console.log("Listening at http://localhost:" + port + "/" + globalPrefix)
     })
