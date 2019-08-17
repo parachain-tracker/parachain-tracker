@@ -1,4 +1,5 @@
 @import "mixins";
+@import "variables";
 
 :host {
     display: flex;
@@ -11,5 +12,17 @@
 ::ng-deep {
     .flickity-viewport {
         flex: 1;
+    }
+}
+
+@media only screen and (max-width: $max-frame-width) {
+    :host.is-ready {
+        overflow: hidden;
+    }
+
+    ::ng-deep {
+        .flickity-viewport {
+            overflow: visible;
+        }
     }
 }

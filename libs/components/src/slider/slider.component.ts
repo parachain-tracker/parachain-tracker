@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Inject,
     PLATFORM_ID,
     Renderer2,
@@ -24,11 +25,16 @@ import { isPlatformBrowser } from "@angular/common"
 export class SliderComponent implements AfterViewInit {
     private slider: Flickity
 
+    @HostBinding("class.is-ready")
+    public isReady: boolean
+
     constructor(
         private elementRef: ElementRef,
         @Inject(PLATFORM_ID) private platformId: object,
         private renderer: Renderer2,
-    ) {}
+    ) {
+        this.isReady = false
+    }
 
     public ngAfterViewInit() {
         if (isPlatformBrowser(this.platformId)) {
@@ -49,6 +55,8 @@ export class SliderComponent implements AfterViewInit {
             this.slider.on("dragEnd", () => {
                 this.renderer.removeStyle(nativeElement, "pointer-events")
             })
+
+            this.isReady = true
         }
     }
 }
