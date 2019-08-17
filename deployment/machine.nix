@@ -2,36 +2,23 @@
   machine =
     { pkgs, resources, ... }:
     let
-      backend  = import ./backend.nix  { inherit pkgs; };
       frontend = import ./frontend.nix { inherit pkgs; };
     in
       {
+    require = [ ./backend.nix ];
 
-    virtualisation.docker.enable = true;
+    # users.mutableUsers = false;
+    # without mutable users we will have to supply ssh keys
 
-    environment.systemPackages = [ pkgs.docker ];
-
-    systemd.services.backend-init = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        path = [ pkgs.docker ];
-        Type = "oneshot";
-        ExecStart = "${backend}/bin/run ${backend} ${pkgs.docker}/bin/docker";
-        User = "root";
-      };
+    users.groups.worker.gid = 1000;
+    users.users.worker = {
+      isNormalUser = false;
+      extraGroups = ["worker"];
+      home = "/app";
+      packages = with pkgs; [
+        nodejs-10_x
+      ];
     };
-
-    # systemd.services.backend = {
-    #   wantedBy = [ "multi-user.target" ];
-    #   serviceConfig = {
-    #     path = [ pkgs.docker ];
-    #     Type = "simple";
-    #     Restart = "always";
-    #     ExecStart = "${pkgs.docker}/bin/docker start api-container";
-    #     User = "root";
-    #   };
-    # };
-
 
     services.nginx = {
       enable = true;
@@ -45,10 +32,16 @@
         "www.parachaintracker.com" = {
           root = "${frontend}/website";
           locations."/api".proxyPass = "http://localhost:3333/api";
+          locations."/" =  {
+            tryFiles = "$uri $uri/ /index.html";
+          };
         };
         "parachaintracker.com" = {
           root = "${frontend}/website";
           locations."/api".proxyPass = "http://localhost:3333/api";
+          locations."/" =  {
+            tryFiles = "$uri $uri/ /index.html";
+          };
         };
       };
     };

@@ -16,6 +16,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+.\#*
 
 # IDE - VSCode
 .vscode/*
@@ -41,7 +42,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
-credentials.json
+# secrets
 token.json
 .google_sheets.json
 .google_sheets.staging.json
+
+# deployment
+deployment/state/

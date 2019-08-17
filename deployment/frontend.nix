@@ -5,17 +5,12 @@ stdenv.mkDerivation rec {
   version      = "1.0.0";
   src          = ./..;
   buildInputs  = [ nodejs-10_x ];
-  preBuild =
-  ''
-    if [ ! -d node_modules/ ]; then
-      exit 1
-    fi
-    patchShebangs ./node_modules/
-  '';
   installPhase =
   ''
-    export HOME=""
-    npm run build:client
+    if [ ! -d ./dist/apps/parachain-tracker/ ]; then
+      echo "run npm run build:client firsr"
+      exit 1
+    fi
     mkdir -p $out/website
     cp -r ./dist/apps/parachain-tracker/* $out/website/
   '';

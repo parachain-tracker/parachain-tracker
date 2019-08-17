@@ -1,5 +1,5 @@
 let
-  aws         = ./ec2-info.nix;
+  aws         = import ./ec2-info.nix;
   region      = aws.region;
   accessKeyId = aws.accessKeyId;
 in
@@ -15,16 +15,15 @@ in
           region                 = region;
           instanceType           = "t2.nano";
           keyPair                = "nixops";
-          elasticIPv4            = resources.ip;
+          elasticIPv4            = resources.elasticIPs.ip;
           ebsInitialRootDiskSize = 8;
           securityGroups         = [
             "default"
-            "ssh-all"
             resources.ec2SecurityGroups.http
-            resources.ec2SecurityGroups.https
+            resources.ec2SecurityGroups.ssh-all
           ];
         };
-        owners = [ "martijn@adamant.work" ];
+        owners = [ "martijn.becker@adamant.dev" ];
       };
 
       nix.gc.automatic = true;
@@ -67,19 +66,24 @@ in
       fromPort = 80;
       toPort = 80;
       sourceIp = "0.0.0.0/0";
-    } ];
-  };
-
-  resources.ec2SecurityGroups.https = {
-    inherit accessKeyId region;
-    rules = [ {
+    }
+    {
       fromPort = 443;
       toPort = 443;
       sourceIp = "0.0.0.0/0";
     } ];
   };
 
-  resources.elasticIPs.repl-to-git = {
+  resources.ec2SecurityGroups.ssh-all = {
+    inherit accessKeyId region;
+    rules = [ {
+      fromPort = 22;
+      toPort = 22;
+      sourceIp = "0.0.0.0/0";
+    } ];
+  };
+
+  resources.elasticIPs.ip = {
     inherit accessKeyId region;
   };
 
