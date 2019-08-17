@@ -2,7 +2,14 @@
 
 # Polkadot Aggregation Platform
 
-Parachain tracker provides bird's eye view of Polkadot ecosystem. This is a community project to host developers who contribute to Polkadot ecosystem.
+Parachain tracker provides bird's eye view of Polkadot ecosystem. This is a community project to host developers who contribute to Polkadot ecosystem. 
+
+# What it does
+
+- Help developers focus on technology without worrying about how to display their projects.
+- Prove oneself that the team is developing Polkadot ecosystem
+
+### and many more to be updated
 
 
 # Run application
