@@ -18,7 +18,7 @@ export class FeaturedProjectsResolver implements Resolve<ProjectTile[]> {
                     id,
                     name,
                     tagline,
-                    iconSrc: `/assets/project/${id}/logo64@2x.png`,
+                    iconSrc: `/assets/projects/${id}/logo64@2x.png`,
                     category: category.name,
                 })),
             ),

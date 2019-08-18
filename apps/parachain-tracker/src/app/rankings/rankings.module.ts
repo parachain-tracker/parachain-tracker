@@ -23,20 +23,12 @@ export class ProjectRankingsResolver implements Resolve<any> {
                     name,
                     category,
                     tagline,
-                    iconSrc: `/assets/project/${id}/logo64@2x.png`,
+                    iconSrc: `/assets/projects/${id}/logo64@2x.png`,
                     rank,
                     status,
                 })),
             ),
-            switchMap(projects =>
-                forkJoin(
-                    projects.map(project =>
-                        this.api
-                            .getTickers(project.id)
-                            .pipe(map(tickers => ({ project, ticker: tickers.items[0].coords }))),
-                    ),
-                ),
-            ),
+            map(projects => projects.map(project => ({ project, ticker: [] }))),
         )
     }
 }
