@@ -10,7 +10,7 @@
     "build:client": "ng build --prod --progress=false",
     "build:api": "ng build api --prod --progress=false",
     "build:api-consumer-producer": "ng build api-consumer-producer --prod --progress=false",
-    "build:backend": "npm run build:api;npm run build:api-consumer-producer;cp .google_sheets.json ./dist/apps/api-consumer-producer;",
+    "build:backend": "npm run build:api;npm run build:api-consumer-producer;npm run build:ssr; rm -rf ./database; npm run db:init",
     "deploy:staging": "npm run build:backend; npm run build:client; nixops deploy -d parachain-tracker",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

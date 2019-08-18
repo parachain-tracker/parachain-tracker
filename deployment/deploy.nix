@@ -26,7 +26,6 @@ in
         owners = [ "martijn.becker@adamant.dev" ];
       };
 
-      nix.gc.automatic = true;
       networking.firewall.allowedTCPPorts = [ 80 443 ];
 
       services.nginx = {
