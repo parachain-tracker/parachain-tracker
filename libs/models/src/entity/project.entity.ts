@@ -4,7 +4,7 @@ import {
     JoinColumn,
     JoinTable,
     ManyToMany,
-    OneToOne,
+    ManyToOne,
     PrimaryGeneratedColumn,
 } from "typeorm"
 import { CategoryEntity } from "./category.entity"
@@ -37,10 +37,10 @@ export class ProjectEntity {
     @Column("text")
     public link: string
 
-    @Column("int")
+    @Column("int", { default: 0 })
     public stars: number
 
-    @Column("int")
+    @Column("int", { default: 0 })
     public commits: number
 
     @Column({ length: 32 })
@@ -54,7 +54,7 @@ export class ProjectEntity {
     public externalLinks
 
     @JoinColumn()
-    @OneToOne(type => CategoryEntity)
+    @ManyToOne(type => CategoryEntity)
     public category: CategoryEntity
 
     @Column("text")
