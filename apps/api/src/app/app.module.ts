@@ -1,6 +1,4 @@
 import { Module } from "@nestjs/common"
-import { AppController } from "./app.controller"
-import { AppService } from "./app.service"
 import { ProjectModule } from "./project/project.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ConnectionOptions } from "typeorm"
@@ -11,14 +9,9 @@ import {
     TickerEntity,
 } from "@parachain-tracker/models"
 import { TickerModule } from "./ticker/ticker.module"
-import { ScheduleModule } from "nest-schedule"
-import { DynamicCronModule } from "./schedule/dynamic_cron.module"
-import { JobsModule } from "./jobs/jobs.module"
-import { environment } from "../environments/environment"
 import { RankingModule } from "./ranking/ranking.module"
 import { FeaturedModule } from "./featured/featured.module"
 
-const path = require("path")
 const ormconfig = require("../../../../ormconfig.json")
 
 // Run migrations from CLI, this line prevents compile error because TypeORM
@@ -30,10 +23,6 @@ const connectionOptions: ConnectionOptions = {
     entities: [ProjectEntity, CategoryEntity, ExternalLinkEntity, TickerEntity],
 }
 
-if (!environment.production) {
-    require("dotenv").config({ path: path.resolve(__dirname, "../../../apps/api/.env") })
-}
-
 @Module({
     imports: [
         TypeOrmModule.forRoot(connectionOptions),
@@ -41,11 +30,8 @@ if (!environment.production) {
         TickerModule,
         RankingModule,
         FeaturedModule,
-        JobsModule,
-        ScheduleModule.register(),
-        DynamicCronModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}

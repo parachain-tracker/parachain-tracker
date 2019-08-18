@@ -7,6 +7,11 @@ import { NestFactory } from "@nestjs/core"
 
 import { AppModule } from "./app/app.module"
 import { environment } from "./environments/environment"
+import { resolve } from "path"
+
+if (!environment.production) {
+    require("dotenv").config({ path: resolve(__dirname, "../.env") })
+}
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)

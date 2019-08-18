@@ -7,6 +7,7 @@ import { CategoryEntity, ProjectEntity } from "@parachain-tracker/models"
 import { InjectRepository } from "@nestjs/typeorm"
 import { OAuth2Client } from "googleapis-common"
 import { promisify } from "util"
+import { Job } from "../jobs/jobs.module"
 
 const fs = require("fs")
 const readline = require("readline")
@@ -244,7 +245,7 @@ function syncGoogleSheets(
     auth: OAuth2Client,
     sheetID: string,
 ) {
-    getSheet(auth, sheetID).then((sheet: Array<any>) => {
+    return getSheet(auth, sheetID).then((sheet: Array<any>) => {
         return Promise.all(
             sheet.map(async (row, i) => {
                 let category = await _category.findOne({ where: { name: row.category } })
@@ -282,23 +283,28 @@ function syncGoogleSheets(
 }
 
 @Injectable()
-export class ProjectService implements OnModuleInit {
+export class ProjectService implements Job {
     constructor(
         @InjectRepository(ProjectEntity) private project: Repository<ProjectEntity>,
         @InjectRepository(CategoryEntity) private category: Repository<CategoryEntity>,
     ) {}
 
-    public async onModuleInit() {
+    public async run() {
         const configPath = environment.configPath
         const tokenPath = environment.tokenPath
 
-        const { credentials, sheetID } = await getConfiguration(configPath)
-        const auth: OAuth2Client = await authorize(credentials.installed, tokenPath)
+        try {
+            const { credentials, sheetID } = await getConfiguration(configPath)
+            const auth: OAuth2Client = await authorize(credentials.installed, tokenPath)
 
-        syncGoogleSheets(this.category, this.project, auth, sheetID)
-        setInterval(
-            () => syncGoogleSheets(this.category, this.project, auth, sheetID),
-            environment.updateRate,
-        )
+            await syncGoogleSheets(this.category, this.project, auth, sheetID)
+            setInterval(
+                () => syncGoogleSheets(this.category, this.project, auth, sheetID),
+                environment.updateRate,
+            )
+        } catch (error) {
+            console.log("Could not synchronise google sheet with database.")
+            console.log(error)
+        }
     }
 }

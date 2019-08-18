@@ -56,4 +56,7 @@ export class ProjectEntity {
     @JoinColumn()
     @OneToOne(type => CategoryEntity)
     public category: CategoryEntity
+
+    @Column("text")
+    public githubRepo: string
 }
