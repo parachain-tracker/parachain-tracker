@@ -44,7 +44,7 @@ import { Observable } from "rxjs"
                     />
                 </div>
                 <h1 class="name">{{ project.name }}</h1>
-                <p class="tagline">A virtual world that runs on open standards.</p>
+                <p class="tagline">{{ project.tagline }}</p>
                 <a [href]="project.link" class="web-url">
                     <i class="web-url-icon fa fa-chevron-circle-right"></i>
                     <span class="web-url-label">Go to website</span>

@@ -35,7 +35,7 @@ testem.log
 /typings
 
 # database
-/database
+/database/db.sqlite
 
 # System Files
 .DS_Store

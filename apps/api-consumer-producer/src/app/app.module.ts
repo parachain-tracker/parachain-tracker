@@ -1,14 +1,12 @@
-import { Module } from "@nestjs/common"
+import { Module, OnModuleInit } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ConnectionOptions } from "typeorm"
-
-import { AppController } from "./app.controller"
-import { AppService } from "./app.service"
 import { ProjectModule } from "./project/project.module"
 
-import { ProjectEntity } from "../../../api/src/app/database/entity/project.entity"
-import { CategoryEntity } from "../../../api/src/app/database/entity/category.entity"
-import { ExternalLinkEntity } from "../../../api/src/app/database/entity/external-link.entity"
+import { CategoryEntity, ExternalLinkEntity, ProjectEntity } from "@parachain-tracker/models"
+import { JobsModule } from "./jobs/jobs.module"
+import { ProjectService } from "./project/project.service"
+import { GithubJob } from "./jobs/github.job"
 
 const ormconfig = require("../../../../ormconfig.json")
 
@@ -20,8 +18,19 @@ const connectionOptions: ConnectionOptions = {
 }
 
 @Module({
-    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule],
-    controllers: [AppController],
-    providers: [AppService],
+    imports: [TypeOrmModule.forRoot(connectionOptions), ProjectModule, JobsModule],
+    controllers: [],
+    providers: [],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+    constructor(private project: ProjectService, private github: GithubJob) {}
+
+    public async onModuleInit() {
+        console.log("Initialize jobs")
+        await this.project.run()
+        await this.github.run()
+        setInterval(async () => {
+            await this.github.run()
+        }, 3600000)
+    }
+}

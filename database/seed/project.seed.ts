@@ -1,10 +1,10 @@
 import { Connection } from "typeorm"
 import { Factory, Seeder, times } from "typeorm-seeding"
-import { ProjectEntity } from "../entity/project.entity"
-import { CategoryEntity } from "../entity/category.entity"
-import { ExternalLinkEntity } from "../entity/external-link.entity"
+import { ProjectEntity } from "../../libs/models/src/entity/project.entity"
+import { CategoryEntity } from "../../libs/models/src/entity/category.entity"
+import { ExternalLinkEntity } from "../../libs/models/src/entity/external-link.entity"
 import * as faker from "faker"
-import { TickerEntity } from "../entity/ticker.entity"
+import { TickerEntity } from "../../libs/models/src/entity/ticker.entity"
 
 const links = ["twitter", "medium", "reddit", "telegram", "riot"]
 

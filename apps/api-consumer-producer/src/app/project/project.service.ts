@@ -1,50 +1,56 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, OnModuleInit } from "@nestjs/common"
 import { google } from "googleapis"
 import { environment } from "../../environments/environment"
-import { Repository, getConnection, Raw, MoreThan } from "typeorm"
+import { Repository } from "typeorm"
 import { ProjectStatus } from "@parachain-tracker/api-interfaces"
-import { ProjectEntity } from "../../../../api/src/app/database/entity/project.entity"
-import { CategoryEntity } from "../../../../api/src/app/database/entity/category.entity"
+import { CategoryEntity, ProjectEntity } from "@parachain-tracker/models"
 import { InjectRepository } from "@nestjs/typeorm"
 import { OAuth2Client } from "googleapis-common"
+import { promisify } from "util"
+import { Job } from "../jobs/jobs.module"
 
 const fs = require("fs")
 const readline = require("readline")
 
-type Credentials = { client_secret: string; client_id: string; redirect_uris: Array<string> }
+interface Credentials {
+    client_secret: string
+    client_id: string
+    redirect_uris: Array<string>
+}
 
 /**
  * Return a promise that resolves with an autherized OAuth2Client
  * @param {Object} credentials The authorization client credentials.
+ * @param tokenPath
  * @returns {Promise<OAuth2Client>}
  */
-function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2Client> {
-    return new Promise(resolve => {
-        const { client_secret, client_id, redirect_uris } = credentials
-        const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
+async function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2Client> {
+    const { client_secret, client_id, redirect_uris } = credentials
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
 
-        // Check if we have previously stored a token.
-        fs.readFile(tokenPath, async (error: any, token: string) => {
-            if (error) {
-                switch (error.code) {
-                    case "ENOENT":
-                        resolve(await getNewToken(oAuth2Client, tokenPath))
-                    default:
-                        console.error(`something went wrong writing token.json`)
-                        throw error
-                }
-            }
-
-            try {
-                oAuth2Client.setCredentials(JSON.parse(token))
-                resolve(oAuth2Client)
-            } catch (error) {
-                console.error("your token.json file is not in valid JSON!")
-                console.error(token)
+    // Check if we have previously stored a token.
+    let token
+    try {
+        token = await promisify(fs.readFile)(tokenPath)
+    } catch (error) {
+        if (error) {
+            if (error.code === "ENOENT") {
+                return getNewToken(oAuth2Client, tokenPath)
+            } else {
+                console.error(`something went wrong writing token.json`)
                 throw error
             }
-        })
-    })
+        }
+    }
+
+    try {
+        oAuth2Client.setCredentials(JSON.parse(token))
+        return oAuth2Client
+    } catch (error) {
+        console.error("your token.json file is not in valid JSON!")
+        console.error(token)
+        throw error
+    }
 }
 
 /**
@@ -89,7 +95,7 @@ function getConfiguration(
  * Return a promise; Get and store new token after prompting for user authorization, and then
  * resolve with the authorized OAuth2 client. Throws on exception
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {string} token_path the path where the token should be stored, if undefined it will
+ * @param {string} tokenPath the path where the token should be stored, if undefined it will
  * be kept in memory
  */
 function getNewToken(oAuth2Client: OAuth2Client, tokenPath: string): Promise<OAuth2Client> {
@@ -113,10 +119,10 @@ function getNewToken(oAuth2Client: OAuth2Client, tokenPath: string): Promise<OAu
                 oAuth2Client.setCredentials(token)
                 if (environment.dontStoreToken !== true) {
                     // Store the token to disk for later program executions
-                    fs.writeFile(tokenPath, JSON.stringify(token), (error: Error) => {
-                        if (error) {
+                    fs.writeFile(tokenPath, JSON.stringify(token), (_error: Error) => {
+                        if (_error) {
                             console.error("Error while trying to write token.json")
-                            throw error
+                            throw _error
                         }
                         console.log("Token stored to", tokenPath)
                     })
@@ -137,7 +143,7 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
         sheets.spreadsheets.values.get(
             {
                 spreadsheetId: sheetID,
-                range: "Chain!A:M",
+                range: "Chain!A:Q",
             },
             (err: Error, res) => {
                 if (err) return reject("The API returned an error: " + err)
@@ -187,6 +193,12 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                             case /tagline/i.test(key):
                                 key_map["tagline"] = i
                                 break
+                            case /featured/i.test(key):
+                                key_map["featured"] = i
+                                break
+                            case /type/i.test(key):
+                                key_map["type"] = i
+                                break
                         }
                     })
                 } else {
@@ -196,12 +208,14 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                     key_map["status"] = 3
                     key_map["category"] = 4
                     key_map["github"] = 5
-                    key_map["homepage"] = 5
                     key_map["link"] = 6
                     key_map["commits"] = 7
                     key_map["stars"] = 8
                     key_map["network"] = 9
                     key_map["tagline"] = 10
+                    key_map["featured"] = 11
+                    key_map["type"] = 12
+                    key_map["homepage"] = 13
                 }
 
                 if (rows.length) {
@@ -221,8 +235,12 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                                     { name: "github", url: row[key_map["github"]] || "" },
                                     { name: "homepage", url: row[key_map["homepage"]] || "" },
                                 ],
+                                homepage: row[key_map["homepage"]] || 0,
+                                githubRepo: parseRepo(row[key_map["github"]]),
                                 network: row[key_map["network"]] || "",
                                 tagline: row[key_map["tagline"]] || "",
+                                type: parseType(row[key_map["type"]]),
+                                featured: parseFeatured(row[key_map["featured"]]),
                             }
                         }),
                     )
@@ -234,39 +252,62 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
     })
 }
 
+function parseType(status: string): number {
+    if (status === void 0) return 0
+
+    return { dapp: 0, parachain: 1 }[status]
+}
+
+function parseFeatured(status: string): number {
+    if (status === void 0) return 0
+
+    return { TRUE: 1, FALSE: 0 }[status]
+}
+
+function parseRepo(url: string): string {
+    if (url === void 0) return ""
+    const match = url.match("github.com/(.*/.*)")
+    if (match && match[1]) {
+        return match[1]
+    }
+    return ""
+}
+
 function syncGoogleSheets(
     _category: Repository<CategoryEntity>,
     _project: Repository<ProjectEntity>,
     auth: OAuth2Client,
     sheetID: string,
 ) {
-    getSheet(auth, sheetID).then((sheet: Array<any>) => {
-        Promise.all(
+    return getSheet(auth, sheetID).then((sheet: Array<any>) => {
+        return Promise.all(
             sheet.map(async (row, i) => {
                 let category = await _category.findOne({ where: { name: row.category } })
                 if (category === void 0) {
                     category = await _category.save({ name: row.category })
                 }
 
-                let project = await _project.findOne(i)
+                const project = await _project.findOne(i)
+
                 delete row.category
+
+                row.category = category.id
 
                 try {
                     if (project === void 0) {
-                        row.categoryId = category.id
                         await _project.save(row)
                     } else {
                         if (project.externalLinks && row.externalLinks) {
                             row.externalLinks = project.externalLinks.map(
-                                (link: { name: string; url: string }, i) => {
-                                    link.name = row.externalLinks[i].name
-                                    link.url = row.externalLinks[i].url
+                                (link: { name: string; url: string }, _i) => {
+                                    link.name = row.externalLinks[_i].name
+                                    link.url = row.externalLinks[_i].url
                                     return link
                                 },
                             )
-                        } else if (row.externalLinks) {
-                            project.externalLinks = row.externalLinks
                         }
+                        if (project.stars) row.stars = project.stars
+                        if (project.commits) row.commits = project.commits
                         await _project.save(row)
                     }
                 } catch (e) {
@@ -278,23 +319,28 @@ function syncGoogleSheets(
 }
 
 @Injectable()
-export class ProjectService {
+export class ProjectService implements Job {
     constructor(
         @InjectRepository(ProjectEntity) private project: Repository<ProjectEntity>,
         @InjectRepository(CategoryEntity) private category: Repository<CategoryEntity>,
     ) {}
 
-    public async onModuleInit() {
+    public async run() {
         const configPath = environment.configPath
         const tokenPath = environment.tokenPath
 
-        const { credentials, sheetID } = await getConfiguration(configPath)
-        const auth: OAuth2Client = await authorize(credentials.installed, tokenPath)
+        try {
+            const { credentials, sheetID } = await getConfiguration(configPath)
+            const auth: OAuth2Client = await authorize(credentials.installed, tokenPath)
 
-        syncGoogleSheets(this.category, this.project, auth, sheetID)
-        setInterval(
-            () => syncGoogleSheets(this.category, this.project, auth, sheetID),
-            environment.updateRate,
-        )
+            await syncGoogleSheets(this.category, this.project, auth, sheetID)
+            setInterval(
+                () => syncGoogleSheets(this.category, this.project, auth, sheetID),
+                environment.updateRate,
+            )
+        } catch (error) {
+            console.log("Could not synchronise google sheet with database.")
+            console.log(error)
+        }
     }
 }

@@ -11,8 +11,7 @@ import {
 } from "@angular/router"
 import { Observable, throwError } from "rxjs"
 import { ApiService } from "../api/api.service"
-import { TickerModule } from "@parachain-tracker/components"
-import { PillModule } from "../../../../../libs/components/src/pill/pill.module"
+import { PillModule, TickerModule } from "@parachain-tracker/components"
 import { catchError, tap } from "rxjs/operators"
 
 export class ProjectResolver implements Resolve<any> {

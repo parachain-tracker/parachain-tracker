@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common"
 import { ProjectType, RankingSearchDto } from "@parachain-tracker/api-interfaces"
 import { InjectRepository } from "@nestjs/typeorm"
-import { ProjectEntity } from "../database/entity/project.entity"
-import { Repository, SelectQueryBuilder } from "typeorm"
-import { CategoryEntity } from "../database/entity/category.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
+import { Repository } from "typeorm"
 
 @Injectable()
 export class RankingService {

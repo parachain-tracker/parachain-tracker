@@ -8,7 +8,7 @@ import { Component, OnInit } from "@angular/core"
             <a class="heading" routerLink="/">
                 <h1>ParachainTracker</h1>
             </a>
-            <a href="#" class="submit-project">
+            <a href="https://hyungsukkang.typeform.com/to/lOEWyp" class="submit-project">
                 <h3>SUBMIT A PROJECT</h3>
             </a>
             <div class="social">

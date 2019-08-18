@@ -1,30 +1,33 @@
 {
-  "npmScope": "parachain-tracker",
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": "*",
-    "tsconfig.json": "*",
-    "tslint.json": "*",
-    "nx.json": "*"
-  },
-  "projects": {
-    "parachain-tracker-e2e": {
-      "tags": []
+    "npmScope": "parachain-tracker",
+    "implicitDependencies": {
+        "angular.json": "*",
+        "package.json": "*",
+        "tsconfig.json": "*",
+        "tslint.json": "*",
+        "nx.json": "*"
     },
-    "parachain-tracker": {
-      "tags": []
-    },
-    "api": {
-      "tags": []
-    },
-    "api-interfaces": {
-      "tags": []
-    },
-    "components": {
-      "tags": []
-    },
-    "api-consumer-producer": {
-      "tags": []
+    "projects": {
+        "parachain-tracker-e2e": {
+            "tags": []
+        },
+        "parachain-tracker": {
+            "tags": []
+        },
+        "api": {
+            "tags": []
+        },
+        "api-interfaces": {
+            "tags": []
+        },
+        "components": {
+            "tags": []
+        },
+        "api-consumer-producer": {
+            "tags": []
+        },
+        "models": {
+            "tags": []
+        }
     }
-  }
 }

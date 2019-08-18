@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common"
-import { ProjectEntity } from "../database/entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 import { DeepPartial, DeleteResult, FindManyOptions, Repository } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 

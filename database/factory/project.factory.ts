@@ -1,5 +1,5 @@
 import { define } from "typeorm-seeding"
-import { ProjectEntity } from "../entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 import * as Faker from "faker"
 
 define(ProjectEntity, (faker: typeof Faker) => {
@@ -16,6 +16,7 @@ define(ProjectEntity, (faker: typeof Faker) => {
     project.link = faker.internet.url()
     project.tagline = faker.lorem.sentence(20, 10)
     project.featured = faker.random.boolean()
+    project.githubRepo = faker.random.word()
 
     return project
 })

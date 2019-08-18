@@ -1,6 +1,6 @@
 import { define } from "typeorm-seeding"
 import * as Faker from "faker"
-import { ExternalLinkEntity } from "../entity/external-link.entity"
+import { ExternalLinkEntity } from "@parachain-tracker/models"
 
 define(ExternalLinkEntity, (faker: typeof Faker, settings: { name: string }) => {
     const externalLink = new ExternalLinkEntity()

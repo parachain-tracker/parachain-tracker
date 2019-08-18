@@ -4,14 +4,14 @@
     "logging": true,
     "migrationsRun": false,
     "database": "database/db.sqlite",
-    "entities": ["apps/api/src/app/database/entity/*.ts"],
-    "migrations": ["apps/api/src/app/database/migration/*.ts"],
-    "subscribers": ["apps/api/src/app/database/subscriber/*.ts"],
+    "entities": ["libs/models/src/entity/*.ts"],
+    "migrations": ["database/migration/*.ts"],
+    "subscribers": ["database/subscriber/*.ts"],
     "cli": {
-        "entitiesDir": "apps/api/src/app/database/entity",
-        "migrationsDir": "apps/api/src/app/database/migration",
-        "subscribersDir": "apps/api/src/app/database/subscriber"
+        "entitiesDir": "libs/models/src/entity",
+        "migrationsDir": "database/migration",
+        "subscribersDir": "database/subscriber"
     },
-    "seeds": ["apps/api/src/app/database/seed/*.seed.ts"],
-    "factories": ["apps/api/src/app/database/factory/*.factory.ts"]
+    "seeds": ["database/seed/*.seed.ts"],
+    "factories": ["database/factory/*.factory.ts"]
 }
