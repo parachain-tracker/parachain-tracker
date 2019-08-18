@@ -24,32 +24,33 @@ interface Credentials {
  * @param tokenPath
  * @returns {Promise<OAuth2Client>}
  */
-function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2Client> {
-    return new Promise(resolve => {
-        const { client_secret, client_id, redirect_uris } = credentials
-        const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
+async function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2Client> {
+    const { client_secret, client_id, redirect_uris } = credentials
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
 
-        // Check if we have previously stored a token.
-        promisify(fs.readFile)(tokenPath, async (error: any, token: string) => {
-            if (error) {
-                if (error.code === "ENOENT") {
-                    resolve(await getNewToken(oAuth2Client, tokenPath))
-                } else {
-                    console.error(`something went wrong writing token.json`)
-                    throw error
-                }
-            }
-
-            try {
-                oAuth2Client.setCredentials(JSON.parse(token))
-                resolve(oAuth2Client)
-            } catch (error) {
-                console.error("your token.json file is not in valid JSON!")
-                console.error(token)
+    // Check if we have previously stored a token.
+    let token
+    try {
+        token = await promisify(fs.readFile)(tokenPath)
+    } catch (error) {
+        if (error) {
+            if (error.code === "ENOENT") {
+                return getNewToken(oAuth2Client, tokenPath)
+            } else {
+                console.error(`something went wrong writing token.json`)
                 throw error
             }
-        })
-    })
+        }
+    }
+
+    try {
+        oAuth2Client.setCredentials(JSON.parse(token))
+        return oAuth2Client
+    } catch (error) {
+        console.error("your token.json file is not in valid JSON!")
+        console.error(token)
+        throw error
+    }
 }
 
 /**

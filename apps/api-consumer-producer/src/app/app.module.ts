@@ -26,26 +26,11 @@ export class AppModule implements OnModuleInit {
     constructor(private project: ProjectService, private github: GithubJob) {}
 
     public async onModuleInit() {
-        console.log("Initialize job runner")
-        console.log("Synchronize Google sheets")
-        try {
-            await this.project.run()
-        } catch (e) {
-            console.log("Could not synchronize Google sheets")
-            console.log(e)
-        }
-        console.log("Synchronize Github stats")
-        try {
-            await this.github.run()
-        } catch (e) {
-            console.log("Could not synchronise Github stats")
-        }
+        console.log("Initialize jobs")
+        await this.project.run()
+        await this.github.run()
         setInterval(async () => {
-            try {
-                await this.github.run()
-            } catch (e) {
-                console.log("Could not synchronise Github stats")
-            }
+            await this.github.run()
         }, 3600)
     }
 }
