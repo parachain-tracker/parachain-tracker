@@ -31,6 +31,6 @@ export class AppModule implements OnModuleInit {
         await this.github.run()
         setInterval(async () => {
             await this.github.run()
-        }, 3600)
+        }, 3600000)
     }
 }
