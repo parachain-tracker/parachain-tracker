@@ -1,7 +1,7 @@
 import { define } from "typeorm-seeding"
 import * as Faker from "faker"
-import { TickerEntity } from "../entity/ticker.entity"
-import { ProjectEntity } from "../entity/project.entity"
+import { TickerEntity } from "../../libs/models/src/entity/ticker.entity"
+import { ProjectEntity } from "../../libs/models/src/entity/project.entity"
 
 const now = Date.now()
 const dates = Array.from({ length: 24 }, (_, index) => now - 3600 * index)

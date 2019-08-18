@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
-import { ProjectEntity } from "../database/entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 import { Repository } from "typeorm"
 
 @Injectable()

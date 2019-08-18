@@ -1,21 +1,26 @@
-import { Injectable } from "@nestjs/common"
+import { Injectable, OnModuleInit } from "@nestjs/common"
 import { google } from "googleapis"
 import { environment } from "../../environments/environment"
-import { Repository, getConnection, Raw, MoreThan } from "typeorm"
+import { Repository } from "typeorm"
 import { ProjectStatus } from "@parachain-tracker/api-interfaces"
-import { ProjectEntity } from "../../../../api/src/app/database/entity/project.entity"
-import { CategoryEntity } from "../../../../api/src/app/database/entity/category.entity"
+import { CategoryEntity, ProjectEntity } from "@parachain-tracker/models"
 import { InjectRepository } from "@nestjs/typeorm"
 import { OAuth2Client } from "googleapis-common"
+import { promisify } from "util"
 
 const fs = require("fs")
 const readline = require("readline")
 
-type Credentials = { client_secret: string; client_id: string; redirect_uris: Array<string> }
+interface Credentials {
+    client_secret: string
+    client_id: string
+    redirect_uris: Array<string>
+}
 
 /**
  * Return a promise that resolves with an autherized OAuth2Client
  * @param {Object} credentials The authorization client credentials.
+ * @param tokenPath
  * @returns {Promise<OAuth2Client>}
  */
 function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2Client> {
@@ -24,14 +29,13 @@ function authorize(credentials: Credentials, tokenPath: string): Promise<OAuth2C
         const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
 
         // Check if we have previously stored a token.
-        fs.readFile(tokenPath, async (error: any, token: string) => {
+        promisify(fs.readFile)(tokenPath, async (error: any, token: string) => {
             if (error) {
-                switch (error.code) {
-                    case "ENOENT":
-                        resolve(await getNewToken(oAuth2Client, tokenPath))
-                    default:
-                        console.error(`something went wrong writing token.json`)
-                        throw error
+                if (error.code === "ENOENT") {
+                    resolve(await getNewToken(oAuth2Client, tokenPath))
+                } else {
+                    console.error(`something went wrong writing token.json`)
+                    throw error
                 }
             }
 
@@ -89,7 +93,7 @@ function getConfiguration(
  * Return a promise; Get and store new token after prompting for user authorization, and then
  * resolve with the authorized OAuth2 client. Throws on exception
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {string} token_path the path where the token should be stored, if undefined it will
+ * @param {string} tokenPath the path where the token should be stored, if undefined it will
  * be kept in memory
  */
 function getNewToken(oAuth2Client: OAuth2Client, tokenPath: string): Promise<OAuth2Client> {
@@ -113,10 +117,10 @@ function getNewToken(oAuth2Client: OAuth2Client, tokenPath: string): Promise<OAu
                 oAuth2Client.setCredentials(token)
                 if (environment.dontStoreToken !== true) {
                     // Store the token to disk for later program executions
-                    fs.writeFile(tokenPath, JSON.stringify(token), (error: Error) => {
-                        if (error) {
+                    fs.writeFile(tokenPath, JSON.stringify(token), (_error: Error) => {
+                        if (_error) {
                             console.error("Error while trying to write token.json")
-                            throw error
+                            throw _error
                         }
                         console.log("Token stored to", tokenPath)
                     })
@@ -241,14 +245,14 @@ function syncGoogleSheets(
     sheetID: string,
 ) {
     getSheet(auth, sheetID).then((sheet: Array<any>) => {
-        Promise.all(
+        return Promise.all(
             sheet.map(async (row, i) => {
                 let category = await _category.findOne({ where: { name: row.category } })
                 if (category === void 0) {
                     category = await _category.save({ name: row.category })
                 }
 
-                let project = await _project.findOne(i)
+                const project = await _project.findOne(i)
                 delete row.category
 
                 try {
@@ -258,9 +262,9 @@ function syncGoogleSheets(
                     } else {
                         if (project.externalLinks && row.externalLinks) {
                             row.externalLinks = project.externalLinks.map(
-                                (link: { name: string; url: string }, i) => {
-                                    link.name = row.externalLinks[i].name
-                                    link.url = row.externalLinks[i].url
+                                (link: { name: string; url: string }, _i) => {
+                                    link.name = row.externalLinks[_i].name
+                                    link.url = row.externalLinks[_i].url
                                     return link
                                 },
                             )
@@ -278,7 +282,7 @@ function syncGoogleSheets(
 }
 
 @Injectable()
-export class ProjectService {
+export class ProjectService implements OnModuleInit {
     constructor(
         @InjectRepository(ProjectEntity) private project: Repository<ProjectEntity>,
         @InjectRepository(CategoryEntity) private category: Repository<CategoryEntity>,

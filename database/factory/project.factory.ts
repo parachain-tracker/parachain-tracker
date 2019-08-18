@@ -1,5 +1,5 @@
 import { define } from "typeorm-seeding"
-import { ProjectEntity } from "../entity/project.entity"
+import { ProjectEntity } from "../../libs/models/src/entity/project.entity"
 import * as Faker from "faker"
 
 define(ProjectEntity, (faker: typeof Faker) => {

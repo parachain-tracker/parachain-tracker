@@ -17,7 +17,8 @@
         "baseUrl": ".",
         "paths": {
             "@parachain-tracker/api-interfaces": ["libs/api-interfaces/index.ts"],
-            "@parachain-tracker/components": ["libs/components/index.ts"]
+            "@parachain-tracker/components": ["libs/components/index.ts"],
+            "@parachain-tracker/models": ["libs/models/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

@@ -4,10 +4,12 @@ import { AppService } from "./app.service"
 import { ProjectModule } from "./project/project.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ConnectionOptions } from "typeorm"
-import { ProjectEntity } from "./database/entity/project.entity"
-import { CategoryEntity } from "./database/entity/category.entity"
-import { ExternalLinkEntity } from "./database/entity/external-link.entity"
-import { TickerEntity } from "./database/entity/ticker.entity"
+import {
+    CategoryEntity,
+    ExternalLinkEntity,
+    ProjectEntity,
+    TickerEntity,
+} from "@parachain-tracker/models"
 import { TickerModule } from "./ticker/ticker.module"
 import { ScheduleModule } from "nest-schedule"
 import { DynamicCronModule } from "./schedule/dynamic_cron.module"

@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common"
 import { RankingController } from "./ranking.controller"
 import { RankingService } from "./ranking.service"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { ProjectEntity } from "../database/entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProjectEntity])],

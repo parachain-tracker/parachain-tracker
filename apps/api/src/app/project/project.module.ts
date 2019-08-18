@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common"
 import { ProjectController } from "./project.controller"
 import { ProjectService } from "./project.service"
-import { ProjectEntity } from "../database/entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 import { TypeOrmModule } from "@nestjs/typeorm"
 
 @Module({

@@ -1,6 +1,6 @@
 import { HttpService, Injectable } from "@nestjs/common"
 import { getRepository } from "typeorm"
-import { ProjectEntity } from "../database/entity/project.entity"
+import { ProjectEntity } from "@parachain-tracker/models"
 import { Job } from "./jobs.module"
 const parse = require("parse-link-header")
 

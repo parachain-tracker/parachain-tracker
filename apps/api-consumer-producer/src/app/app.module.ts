@@ -6,9 +6,7 @@ import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
 import { ProjectModule } from "./project/project.module"
 
-import { ProjectEntity } from "../../../api/src/app/database/entity/project.entity"
-import { CategoryEntity } from "../../../api/src/app/database/entity/category.entity"
-import { ExternalLinkEntity } from "../../../api/src/app/database/entity/external-link.entity"
+import { CategoryEntity, ExternalLinkEntity, ProjectEntity } from "@parachain-tracker/models"
 
 const ormconfig = require("../../../../ormconfig.json")
 

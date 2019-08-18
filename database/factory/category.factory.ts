@@ -1,6 +1,6 @@
 import { define } from "typeorm-seeding"
 import * as Faker from "faker"
-import { CategoryEntity } from "../entity/category.entity"
+import { CategoryEntity } from "../../libs/models/src/entity/category.entity"
 
 define(CategoryEntity, (faker: typeof Faker) => {
     const category = new CategoryEntity()
