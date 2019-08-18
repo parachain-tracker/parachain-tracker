@@ -143,7 +143,7 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
         sheets.spreadsheets.values.get(
             {
                 spreadsheetId: sheetID,
-                range: "Chain!A:M",
+                range: "Chain!A:Q",
             },
             (err: Error, res) => {
                 if (err) return reject("The API returned an error: " + err)
@@ -193,6 +193,12 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                             case /tagline/i.test(key):
                                 key_map["tagline"] = i
                                 break
+                            case /featured/i.test(key):
+                                key_map["featured"] = i
+                                break
+                            case /type/i.test(key):
+                                key_map["type"] = i
+                                break
                         }
                     })
                 } else {
@@ -202,12 +208,14 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                     key_map["status"] = 3
                     key_map["category"] = 4
                     key_map["github"] = 5
-                    key_map["homepage"] = 5
                     key_map["link"] = 6
                     key_map["commits"] = 7
                     key_map["stars"] = 8
                     key_map["network"] = 9
                     key_map["tagline"] = 10
+                    key_map["featured"] = 11
+                    key_map["type"] = 12
+                    key_map["homepage"] = 13
                 }
 
                 if (rows.length) {
@@ -227,8 +235,12 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
                                     { name: "github", url: row[key_map["github"]] || "" },
                                     { name: "homepage", url: row[key_map["homepage"]] || "" },
                                 ],
+                                homepage: row[key_map["homepage"]] || 0,
+                                githubRepo: parseRepo(row[key_map["github"]]),
                                 network: row[key_map["network"]] || "",
                                 tagline: row[key_map["tagline"]] || "",
+                                type: parseType(row[key_map["type"]]),
+                                featured: parseFeatured(row[key_map["featured"]]),
                             }
                         }),
                     )
@@ -238,6 +250,27 @@ function getSheet(auth: OAuth2Client, sheetID: string) {
             },
         )
     })
+}
+
+function parseType(status: string): number {
+    if (status === void 0) return 0
+
+    return { dapp: 0, parachain: 1 }[status]
+}
+
+function parseFeatured(status: string): number {
+    if (status === void 0) return 0
+
+    return { TRUE: 1, FALSE: 0 }[status]
+}
+
+function parseRepo(url: string): string {
+    if (url === void 0) return ""
+    const match = url.match("github.com/(.*/.*)")
+    if (match && match[1]) {
+        return match[1]
+    }
+    return ""
 }
 
 function syncGoogleSheets(
@@ -255,11 +288,13 @@ function syncGoogleSheets(
                 }
 
                 const project = await _project.findOne(i)
+
                 delete row.category
+
+                row.category = category.id
 
                 try {
                     if (project === void 0) {
-                        row.categoryId = category.id
                         await _project.save(row)
                     } else {
                         if (project.externalLinks && row.externalLinks) {
@@ -270,9 +305,9 @@ function syncGoogleSheets(
                                     return link
                                 },
                             )
-                        } else if (row.externalLinks) {
-                            project.externalLinks = row.externalLinks
                         }
+                        if (project.stars) row.stars = project.stars
+                        if (project.commits) row.commits = project.commits
                         await _project.save(row)
                     }
                 } catch (e) {
