@@ -17,6 +17,7 @@ const headers = {
 }
 
 async function getGithubCommits(http: HttpService, githubRepo: string): Promise<number> {
+    if (!githubRepo) return 0
     const res = await http
         .get(`https://api.github.com/repos/${githubRepo}/commits`, { headers })
         .toPromise()
@@ -31,6 +32,7 @@ async function getGithubCommits(http: HttpService, githubRepo: string): Promise<
 }
 
 async function getGithubStars(http: HttpService, githubRepo: string): Promise<number> {
+    if (!githubRepo) return 0
     const res = await http
         .get(`https://api.github.com/search/repositories?q=repo:${githubRepo}`, { headers })
         .toPromise()
