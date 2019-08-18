@@ -1,0 +1,66 @@
+@import "variables";
+
+.top-items {
+    width: 100%;
+    max-width: $max-frame-width;
+    margin: 48px auto 0;
+    height: 820px;
+    background: #ffffff;
+}
+
+.items-title {
+    display: flex;
+}
+
+.top-parachains-svg {
+    width: 21px;
+    height: 24px;
+    background: url("/assets/top-parachains.svg");
+}
+
+.items-txt {
+    margin-left: 16px;
+    margin-top: -8px;
+    font-weight: lighter;
+    font-family: var(--pt-font-futura-lt);
+    font-size: 32px;
+}
+
+.title {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 28px;
+    margin-left: 56px;
+    margin-top: 48px;
+}
+
+.items-slider {
+    padding: 32px 56px 48px;
+    width: 100%;
+}
+
+.view-all-svg {
+    background: url("/assets/view-all.svg") no-repeat;
+    width: 16px;
+    height: 14px;
+}
+
+.view-all {
+    display: flex;
+    width: 85px;
+    justify-content: space-around;
+    height: 16px;
+    position: relative;
+    align-items: center;
+    font-family: var(--pt-font-sans);
+    font-size: 14px;
+    text-decoration: none;
+    color: $primary-color;
+}
+
+.top-dapps-svg {
+    width: 24px;
+    height: 24px;
+    background: url("/assets/top-dapps.svg");
+}

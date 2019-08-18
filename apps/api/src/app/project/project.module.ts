@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common"
-import { ProjectController } from "./project-controller"
+import { ProjectController } from "./project.controller"
 import { ProjectService } from "./project.service"
 import { ProjectEntity } from "../database/entity/project.entity"
 import { TypeOrmModule } from "@nestjs/typeorm"

@@ -34,6 +34,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+token.json
 
 # database
 /database
@@ -43,7 +44,7 @@ testem.log
 Thumbs.db
 
 # secrets
-token.json
+.env
 .google_sheets.json
 .google_sheets.staging.json
 

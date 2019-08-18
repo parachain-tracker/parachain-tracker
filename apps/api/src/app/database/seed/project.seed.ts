@@ -6,7 +6,7 @@ import { ExternalLinkEntity } from "../entity/external-link.entity"
 import * as faker from "faker"
 import { TickerEntity } from "../entity/ticker.entity"
 
-const links = ["twitter", "medium", "reddit", "facebook", "chat"]
+const links = ["twitter", "medium", "reddit", "telegram", "riot"]
 
 function getRandomSubarray(arr, size) {
     const shuffled = arr.slice(0)
@@ -40,7 +40,7 @@ export default class CreateDapps implements Seeder {
             let project = await factory(ProjectEntity)().make()
             const tickerFactory = factory(TickerEntity)
 
-            project.category = await factory(CategoryEntity)({ roles: ["admin"] }).make()
+            project.category = await factory(CategoryEntity)().make()
             project.externalLinks = randomLinks
 
             await em.save(project.category)

@@ -1,5 +1,12 @@
-import { IsNumber, IsOptional, IsString, MaxLength, ValidateNested } from "class-validator"
-import { ProjectStatus } from "../api-interfaces"
+import {
+    IsBoolean,
+    IsNumber,
+    IsOptional,
+    IsString,
+    MaxLength,
+    ValidateNested,
+} from "class-validator"
+import { ProjectStatus, ProjectType } from "../api-interfaces"
 import { Type } from "class-transformer"
 import { ExternalLinksDto } from "./external-links-dto"
 import { CategoryDto } from "./category-dto"
@@ -44,4 +51,13 @@ export class ProjectDto {
     @ValidateNested()
     @Type(() => CategoryDto)
     public category?: CategoryDto
+
+    @IsString()
+    public tagline!: string
+
+    @IsBoolean()
+    public featured!: boolean
+
+    @IsNumber()
+    public type: ProjectType
 }

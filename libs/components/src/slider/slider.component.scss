@@ -1,7 +1,28 @@
 @import "mixins";
+@import "variables";
 
 :host {
-    display: block;
+    display: flex;
     position: relative;
     height: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+::ng-deep {
+    .flickity-viewport {
+        flex: 1;
+    }
+}
+
+@media only screen and (max-width: $max-frame-width) {
+    :host.is-ready {
+        overflow: hidden;
+    }
+
+    ::ng-deep {
+        .flickity-viewport {
+            overflow: visible;
+        }
+    }
 }
