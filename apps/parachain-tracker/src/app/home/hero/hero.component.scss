@@ -16,6 +16,11 @@
     top: 0;
     display: flex;
     overflow: hidden;
+
+    @include media(handset) {
+        height: auto;
+        padding-bottom: 48px;
+    }
 }
 
 .hero-txt {
@@ -137,6 +142,10 @@ h2 {
     border-radius: 8px;
     box-shadow: 4px 4px 4px rgba(103, 14, 53, 0.5);
     border: none;
+
+    @include media(handset) {
+        margin: 40px auto 0;
+    }
 }
 
 .goto-button p {
