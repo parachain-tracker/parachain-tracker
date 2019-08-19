@@ -1,3 +1,6 @@
+@import "mixins";
+@import "variables";
+
 :host {
     display: flex;
     flex-direction: column;
@@ -9,6 +12,7 @@ nav {
 
     position: relative;
     display: flex;
+    align-items: center;
     height: 56px;
     z-index: 1;
 
@@ -22,23 +26,26 @@ nav {
 h1 {
     /* ParachainTracker */
 
-    position: absolute;
-    left: 2.88%;
-    right: 79.74%;
-    top: -10%;
-
     font-family: var(--pt-font-futura-lt);
     font-size: 24px;
     line-height: 29px;
-    /* identical to box height */
+    margin: 0;
+    color: $light-color;
 
-    /* Off White */
-
-    color: #f7f3f7;
+    @include media(small) {
+        @include visually-hidden;
+    }
 }
 
 .heading {
+    display: flex;
     text-decoration: none;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    margin: 0 16px;
 }
 
 .submit-project {
@@ -50,31 +57,32 @@ h1 {
     bottom: 10px;
 
     /* Subtle */
-    width: 170px;
+    width: 140px;
     border: 2px solid #d3b9c3;
     box-sizing: border-box;
     border-radius: 2px;
     text-decoration: none;
 }
 
-h3 {
+.submit-project > span {
     /* Submit a PROJECT */
-
     display: flex;
     justify-content: center;
     margin-top: 5px;
 
-    font-family: var(--pt-font-futura-lt);
+    white-space: nowrap;
+    font-family: var(--pt-font-futura-md);
     font-weight: bolder;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     /* identical to box height, or 133% */
 
+    transform: scale(0.8, 1);
     text-transform: uppercase;
 
     /* Off White */
 
-    color: #f7f3f7;
+    color: $light-color;
     border-radius: 2px;
 }
 
@@ -135,5 +143,9 @@ footer {
         width: 24px;
         color: inherit;
         text-decoration: none;
+    }
+
+    @include media(small) {
+        display: none;
     }
 }
