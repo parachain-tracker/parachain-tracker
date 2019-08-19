@@ -32,7 +32,7 @@ h1 {
     margin: 0;
     color: $light-color;
 
-    @include media(small) {
+    @include media(handset) {
         @include visually-hidden;
     }
 }
@@ -145,7 +145,7 @@ footer {
         text-decoration: none;
     }
 
-    @include media(small) {
+    @include media(handset) {
         display: none;
     }
 }

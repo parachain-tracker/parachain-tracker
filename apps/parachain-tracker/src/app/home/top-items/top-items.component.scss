@@ -26,7 +26,7 @@
     font-family: var(--pt-font-futura-lt);
     font-size: 32px;
 
-    @include media(small) {
+    @include media(handset) {
         font-size: 28px;
     }
 }
@@ -37,7 +37,7 @@
     align-items: center;
     margin: 48px 32px 0 56px;
 
-    @include media(small) {
+    @include media(handset) {
         margin: 32px 16px 0;
     }
 }
@@ -46,7 +46,7 @@
     padding: 32px 56px 48px;
     width: 100%;
 
-    @include media(small) {
+    @include media(handset) {
         padding: 32px 16px 16px;
     }
 }

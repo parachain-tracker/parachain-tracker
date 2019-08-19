@@ -16,7 +16,7 @@ import { ActivatedRoute } from "@angular/router"
                     *ngFor="let project of projects"
                     [routerLink]="['/project', project.id]"
                 >
-                    <pt-project-tile [feature]="project"></pt-project-tile>
+                    <pt-project-tile class="project-tile" [feature]="project"></pt-project-tile>
                 </a>
             </div>
         </div>

@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core"
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
+import { BreakpointObserver } from "@angular/cdk/layout"
+import { Subscription } from "rxjs"
+
+export const HANDSET = "(max-width: 668px)"
+export const TABLET = "(max-width: 1002px)"
+export const FRAME = "(max-width: 1336px)"
 
 @Component({
     selector: "pt-rankings",
@@ -61,13 +67,8 @@ import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
                 </ng-container>
 
                 <!-- Header and Row Declarations -->
-                <cdk-header-row
-                    class="table-header"
-                    *cdkHeaderRowDef="['rank', 'ticker', 'name', 'category', 'status']"
-                ></cdk-header-row>
-                <ng-container
-                    *cdkRowDef="let item; columns: ['rank', 'ticker', 'name', 'category', 'status']"
-                >
+                <cdk-header-row class="table-header" *cdkHeaderRowDef="columns"></cdk-header-row>
+                <ng-container *cdkRowDef="let item; columns: columns">
                     <a class="table-body" [routerLink]="['/project', item.project.id]">
                         <cdk-row class="table-row"></cdk-row>
                     </a>
@@ -78,14 +79,35 @@ import { ProjectDto, ProjectStatus } from "@parachain-tracker/api-interfaces"
     styleUrls: ["./rankings.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RankingsComponent {
+export class RankingsComponent implements OnDestroy {
     public rankings: { project: ProjectDto; ticker: any[] }[]
 
     public projectStatus = ProjectStatus
 
-    constructor(route: ActivatedRoute) {
-        route.data.subscribe(data => {
-            this.rankings = data.rankings
-        })
+    public sub = new Subscription()
+
+    public columns: string[]
+
+    constructor(route: ActivatedRoute, breakpoint: BreakpointObserver, cdr: ChangeDetectorRef) {
+        this.sub.add(
+            route.data.subscribe(data => {
+                this.rankings = data.rankings
+            }),
+        )
+
+        this.sub.add(
+            breakpoint.observe([HANDSET, TABLET, FRAME]).subscribe(state => {
+                if (state.breakpoints[HANDSET]) {
+                    this.columns = ["rank", "name"]
+                } else {
+                    this.columns = ["rank", "ticker", "name", "category", "status"]
+                }
+                cdr.markForCheck()
+            }),
+        )
+    }
+
+    public ngOnDestroy() {
+        this.sub.unsubscribe()
     }
 }

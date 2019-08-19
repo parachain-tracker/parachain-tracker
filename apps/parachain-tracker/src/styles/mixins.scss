@@ -10,7 +10,7 @@
 }
 
 @mixin media($breakpoint-name) {
-    @media all and (max-width: map-get($breakpoints, $breakpoint-name)) {
+    @media all and #{map-get($breakpoints, $breakpoint-name)} {
         @content;
     }
 }

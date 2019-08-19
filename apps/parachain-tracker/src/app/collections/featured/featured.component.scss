@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
     display: flex;
@@ -16,6 +17,10 @@
     padding: 40px 56px 80px;
     max-width: $max-frame-width;
     box-shadow: 0 4px 8px rgba(103, 14, 53, 0.1), 0 0 1px rgba(0, 0, 0, 0.25);
+
+    @include media(handset) {
+        padding: 40px 16px 80px;
+    }
 }
 
 .heading {
@@ -41,9 +46,17 @@
     grid-column-gap: 16px;
     grid-row-gap: 24px;
     grid-template-columns: repeat(auto-fill, 232px);
+
+    @include media(handset) {
+        grid-template-columns: 100%;
+    }
 }
 
 .grid-tile {
     color: inherit;
     cursor: pointer;
+}
+
+.project-tile {
+    width: 100%;
 }

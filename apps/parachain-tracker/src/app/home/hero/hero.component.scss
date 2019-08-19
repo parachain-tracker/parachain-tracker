@@ -30,7 +30,7 @@
     height: calc(652 / 453 * 50vw);
     background: url("/assets/Logos.svg") no-repeat;
 
-    @include media(small) {
+    @include media(handset) {
         background: none;
     }
 }
@@ -47,7 +47,7 @@
     margin-bottom: 18px;
     display: flex;
 
-    @include media(small) {
+    @include media(handset) {
         margin-left: 16px;
     }
 }
@@ -66,7 +66,7 @@ h1 {
 
     color: $light-color;
 
-    @include media(small) {
+    @include media(handset) {
         min-width: 0;
         height: auto;
         margin: 80px 16px 0;
@@ -76,7 +76,7 @@ h1 {
 }
 
 .not-small {
-    @include media(small) {
+    @include media(handset) {
         display: none;
     }
 }
@@ -91,7 +91,7 @@ h2 {
     line-height: 24px;
     color: $light-color;
 
-    @include media(small) {
+    @include media(handset) {
         width: auto;
         height: auto;
         margin: 24px 16px;
@@ -161,6 +161,10 @@ h2 {
 
     > p {
         margin: 40px 16px 16px;
+    }
+
+    @include media(larger-than-handset) {
+        display: none;
     }
 }
 

@@ -6,7 +6,12 @@ $dark-color: #2d2f33;
 $max-frame-width: 1336px;
 
 $breakpoints: (
-    "small": 668px,
-    "medium": 1002px,
-    "large": 1336px,
+    "handset": "(max-width: 668px)",
+    "larger-than-handset": "(min-width: 669px)",
+    "tablet": "(min-width: 669px) and (max-width: 1002px)",
+    "smaller-than-tablet": "(max-width: 1002px)",
+    "larger-than-tablet": "(min-width: 1003px)",
+    "frame": "(min-width: 1003px) and (max-width: 1336px)",
+    "smaller-than-frame": "(max-width: 1336px)",
+    "larger-than-frame": "(min-width: 1337px)",
 );

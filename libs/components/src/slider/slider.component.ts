@@ -5,6 +5,7 @@ import {
     ElementRef,
     HostBinding,
     Inject,
+    Input,
     PLATFORM_ID,
     Renderer2,
 } from "@angular/core"
@@ -25,6 +26,9 @@ import { isPlatformBrowser } from "@angular/common"
 export class SliderComponent implements AfterViewInit {
     private slider: Flickity
 
+    @Input()
+    public cellAlign: string
+
     @HostBinding("class.is-ready")
     public isReady: boolean
 
@@ -40,7 +44,7 @@ export class SliderComponent implements AfterViewInit {
         if (isPlatformBrowser(this.platformId)) {
             const nativeElement = this.elementRef.nativeElement
             this.slider = new Flickity(nativeElement, {
-                cellAlign: "left",
+                cellAlign: this.cellAlign || "left",
                 contain: true,
                 freeScroll: true,
                 groupCells: true,
