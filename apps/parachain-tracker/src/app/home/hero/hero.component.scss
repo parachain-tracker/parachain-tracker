@@ -1,3 +1,4 @@
+@import "mixins";
 @import "variables";
 
 :host {
@@ -15,6 +16,11 @@
     top: 0;
     display: flex;
     overflow: hidden;
+
+    @include media(handset) {
+        height: auto;
+        padding-bottom: 48px;
+    }
 }
 
 .hero-txt {
@@ -22,14 +28,16 @@
 }
 
 .hero-svg {
-    /* Logos */
-
     position: absolute;
     right: 0;
     top: 180px;
     width: 50vw;
     height: calc(652 / 453 * 50vw);
     background: url("/assets/Logos.svg") no-repeat;
+
+    @include media(handset) {
+        background: none;
+    }
 }
 
 .goto {
@@ -43,11 +51,13 @@
     margin-left: 50px;
     margin-bottom: 18px;
     display: flex;
+
+    @include media(handset) {
+        margin-left: 16px;
+    }
 }
 
 h1 {
-    /* Explore DApps and Parachains  on the Polkadot Network */
-
     min-width: 613px;
     height: 112px;
     margin-left: 56px;
@@ -58,11 +68,22 @@ h1 {
     font-weight: lighter;
     font-size: 48px;
     line-height: 56px;
-    /* or 117% */
 
-    /* Off White */
+    color: $light-color;
 
-    color: #f7f3f7;
+    @include media(handset) {
+        min-width: 0;
+        height: auto;
+        margin: 80px 16px 0;
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+.not-small {
+    @include media(handset) {
+        display: none;
+    }
 }
 
 h2 {
@@ -73,8 +94,14 @@ h2 {
     font-family: var(--pt-font-futura-lt);
     font-size: 18px;
     line-height: 24px;
+    color: $light-color;
 
-    color: #f7f3f7;
+    @include media(handset) {
+        width: auto;
+        height: auto;
+        margin: 24px 16px;
+        font-size: 16px;
+    }
 }
 
 .hero-link {
@@ -84,10 +111,8 @@ h2 {
     font-size: 16px;
     line-height: 24px;
     /* identical to box height, or 150% */
-
     text-decoration-line: underline;
-
-    color: #f7f3f7;
+    color: $light-color;
 }
 
 .advertisement {
@@ -117,6 +142,10 @@ h2 {
     border-radius: 8px;
     box-shadow: 4px 4px 4px rgba(103, 14, 53, 0.5);
     border: none;
+
+    @include media(handset) {
+        margin: 40px auto 0;
+    }
 }
 
 .goto-button p {
@@ -127,4 +156,36 @@ h2 {
     /* identical to box height, or 86% */
     text-transform: capitalize;
     color: #f7f3f7;
+}
+
+.follow-us {
+    font-family: var(--pt-font-sans);
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: $light-color;
+
+    > p {
+        margin: 40px 16px 16px;
+    }
+
+    @include media(larger-than-handset) {
+        display: none;
+    }
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+
+    > a {
+        color: $light-color;
+        text-decoration: none;
+        margin: 0 16px;
+        font-size: 24px;
+        font-weight: normal;
+    }
 }

@@ -7,6 +7,10 @@
     height: auto;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+
+    &.flickity-enabled {
+        overflow: hidden;
+    }
 }
 
 ::ng-deep {

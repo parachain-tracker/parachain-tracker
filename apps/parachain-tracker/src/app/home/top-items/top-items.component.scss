@@ -1,11 +1,12 @@
 @import "variables";
+@import "mixins";
 
 .top-items {
     width: 100%;
     max-width: $max-frame-width;
-    margin: 48px auto 0;
-    height: 820px;
     background: #ffffff;
+    padding-bottom: 48px;
+    margin: 0 auto;
 }
 
 .items-title {
@@ -21,23 +22,34 @@
 .items-txt {
     margin-left: 16px;
     margin-top: -8px;
+    margin-bottom: 0;
     font-weight: lighter;
     font-family: var(--pt-font-futura-lt);
     font-size: 32px;
+
+    @include media(handset) {
+        font-size: 28px;
+    }
 }
 
 .title {
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
-    width: 90%;
-    height: 28px;
-    margin-left: 56px;
-    margin-top: 48px;
+    align-items: center;
+    margin: 48px 32px 0 56px;
+
+    @include media(handset) {
+        margin: 32px 16px 0;
+    }
 }
 
 .items-slider {
     padding: 32px 56px 48px;
     width: 100%;
+
+    @include media(handset) {
+        padding: 32px 16px 16px;
+    }
 }
 
 .view-all-svg {
@@ -57,6 +69,10 @@
     font-size: 14px;
     text-decoration: none;
     color: $primary-color;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    text-transform: uppercase;
 }
 
 .top-dapps-svg {

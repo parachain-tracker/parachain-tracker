@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
     display: flex;
@@ -26,9 +27,13 @@
     justify-content: center;
     width: 100%;
     height: 232px;
+    background-color: $dark-color;
     background-size: cover;
     background-position: center center;
-    padding-bottom: 16px;
+}
+
+.pill-slider {
+    padding: 16px;
 }
 
 .header {
@@ -43,6 +48,18 @@
         "logo      name"
         "logo      tagline"
         "link      link";
+
+    @include media(handset) {
+        padding: 32px 16px;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "logo"
+            "name"
+            "tagline"
+            "link"
+            "developer";
+    }
 }
 
 .logo-frame {
@@ -50,6 +67,7 @@
     display: flex;
     width: 64px;
     height: 64px;
+    margin: 0 auto;
 
     > img {
         width: 100%;
@@ -73,6 +91,11 @@
     display: flex;
     align-items: center;
     color: $primary-color;
+
+    @include media(handset) {
+        text-align: center;
+        margin: 40px auto 0;
+    }
 }
 
 .name {
@@ -83,6 +106,13 @@
     font-weight: 300;
     font-size: 32px;
     line-height: 38px;
+
+    @include media(handset) {
+        font-size: 28px;
+        line-height: 36px;
+        margin: 16px 0 8px;
+        text-align: center;
+    }
 }
 
 .tagline {
@@ -92,6 +122,10 @@
     font-weight: 300;
     font-size: 16px;
     line-height: 150%;
+
+    @include media(handset) {
+        text-align: center;
+    }
 }
 
 .web-url {
@@ -101,6 +135,10 @@
     margin-top: 32px;
     color: inherit;
     text-decoration: none;
+
+    @include media(handset) {
+        margin: 32px auto 0;
+    }
 }
 
 .web-url-icon {
@@ -126,6 +164,16 @@
     grid-template-columns: auto 72px;
     grid-template-rows: max-content;
     background: #ffffff;
+
+    @include media(handset) {
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "social-header"
+            "social"
+            "description"
+            "stats";
+    }
 }
 
 .social {
@@ -135,11 +183,39 @@
     flex-direction: column;
     margin: 32px 0;
     border-left: 1px solid $subtle-color;
+
+    @include media(handset) {
+        flex-direction: row;
+        border-left: none;
+        border-bottom: 1px solid $subtle-color;
+        margin: 0 20px 0;
+        padding-bottom: 24px;
+        justify-content: center;
+    }
 }
 
 .social-link {
     margin: 16px auto;
     text-decoration: none;
+
+    @include media(handset) {
+        margin: 0 16px;
+    }
+}
+
+.social-header {
+    grid-area: social-header;
+    margin: 32px 16px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include media(larger-than-handset) {
+        @include visually-hidden;
+    }
 }
 
 .social-icon {
@@ -148,7 +224,7 @@
 }
 
 .riot {
-    display: inline-block;
+    display: block;
     font-size: 0;
     width: 24px;
     height: 27px;
@@ -163,11 +239,19 @@
     > p:last-child {
         margin-bottom: 0;
     }
+
+    @include media(handset) {
+        padding: 32px 16px 0;
+    }
 }
 
 .stats {
     grid-area: stats;
     padding: 32px 32px 80px 56px;
+
+    @include media(handset) {
+        padding: 32px 16px 80px;
+    }
 }
 
 .section-heading {
@@ -182,10 +266,14 @@
     grid-template-columns: repeat(auto-fill, 192px);
     grid-column-gap: 16px;
     grid-row-gap: 24px;
+
+    @include media(handset) {
+        grid-template-columns: 100%;
+    }
 }
 
 .stats-tile {
-    width: 192px;
+    width: 100%;
     height: 192px;
     position: relative;
     box-shadow: 0 4px 8px rgba(103, 14, 53, 0.1), 0 0 1px rgba(0, 0, 0, 0.25);
@@ -245,7 +333,6 @@
     align-items: center;
     height: 32px;
     padding: 0 16px 0 8px;
-    margin: 0 8px;
     border-radius: 16px;
 
     &:before {

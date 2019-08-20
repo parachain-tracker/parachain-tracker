@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .featured {
     width: 100%;
@@ -10,6 +11,7 @@
 
 .featured-title {
     display: flex;
+    align-items: baseline;
 }
 
 .featured-svg {
@@ -24,20 +26,31 @@
     font-weight: lighter;
     font-family: var(--pt-font-futura-lt);
     font-size: 32px;
+
+    @include media(handset) {
+        margin: 0 0 0 16px;
+    }
 }
 
 .title {
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
-    width: 90%;
+    align-items: baseline;
     height: 28px;
-    margin-left: 56px;
-    margin-top: 48px;
+    margin: 48px 32px 0 56px;
+
+    @include media(handset) {
+        margin: 32px 16px 0;
+    }
 }
 
 .featured-slider {
     padding: 32px 56px 0;
     width: 100%;
+
+    @include media(handset) {
+        padding: 32px 16px 0;
+    }
 }
 
 .view-all-svg {
@@ -57,4 +70,8 @@
     text-decoration: none;
     font-size: 14px;
     color: $primary-color;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    text-transform: uppercase;
 }

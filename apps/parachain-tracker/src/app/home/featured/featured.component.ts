@@ -14,7 +14,7 @@ import { ProjectTile } from "@parachain-tracker/components"
                 <a [routerLink]="['/collections/featured']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
-                        <h3>view all</h3>
+                        <span>view all</span>
                     </div>
                 </a>
             </div>

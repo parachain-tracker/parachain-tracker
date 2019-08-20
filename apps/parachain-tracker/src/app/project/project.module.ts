@@ -11,7 +11,7 @@ import {
 } from "@angular/router"
 import { Observable, throwError } from "rxjs"
 import { ApiService } from "../api/api.service"
-import { PillModule, TickerModule } from "@parachain-tracker/components"
+import { PillModule, SliderModule, TickerModule } from "@parachain-tracker/components"
 import { catchError, tap } from "rxjs/operators"
 
 export class ProjectResolver implements Resolve<any> {
@@ -47,7 +47,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [ProjectComponent],
-    imports: [CommonModule, RouterModule.forChild(routes), TickerModule, PillModule],
+    imports: [CommonModule, RouterModule.forChild(routes), TickerModule, PillModule, SliderModule],
     providers: [ProjectResolver],
 })
 export class ProjectModule {}

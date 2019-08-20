@@ -18,18 +18,30 @@ import { Observable } from "rxjs"
                 class="banner"
                 style.background-image="url(/assets/projects/{{ project.id }}/banner.jpg)"
             >
-                <pt-pill class="pill" *ngIf="project.network" [label]="project.network"></pt-pill>
-                <pt-pill
-                    class="pill"
-                    *ngIf="project.category"
-                    [label]="project.category.name"
-                ></pt-pill>
-                <pt-pill
-                    class="pill"
-                    *ngIf="project.status >= 0"
-                    [label]="projectStatus[project.status]"
-                    color="#0FC92D"
-                ></pt-pill>
+                <pt-slider class="pill-slider" cellAlign="center">
+                    <pt-slide>
+                        <pt-pill
+                            class="pill"
+                            *ngIf="project.network"
+                            [label]="project.network"
+                        ></pt-pill>
+                    </pt-slide>
+                    <pt-slide>
+                        <pt-pill
+                            class="pill"
+                            *ngIf="project.category"
+                            [label]="project.category.name"
+                        ></pt-pill>
+                    </pt-slide>
+                    <pt-slide>
+                        <pt-pill
+                            class="pill"
+                            *ngIf="project.status >= 0"
+                            [label]="projectStatus[project.status]"
+                            color="#0FC92D"
+                        ></pt-pill>
+                    </pt-slide>
+                </pt-slider>
             </div>
 
             <div class="header">
@@ -52,9 +64,17 @@ import { Observable } from "rxjs"
             </div>
 
             <div class="detail">
-                <div class="social">
-                    <ng-container *ngFor="let link of (externalLinks | async); let index = index">
-                        <a class="social-link" *ngIf="link" [href]="link.url" target="_blank">
+                <ng-container *ngIf="(externalLinks | async) as links">
+                    <div class="social-header">
+                        Follow us at
+                    </div>
+                    <div class="social">
+                        <a
+                            class="social-link"
+                            *ngFor="let link of links; let index = index"
+                            [href]="link.url"
+                            target="_blank"
+                        >
                             <ng-container
                                 *ngIf="link.name === 'riot'; then riot; else social"
                             ></ng-container>
@@ -76,8 +96,8 @@ import { Observable } from "rxjs"
                                 </svg>
                             </ng-template>
                         </a>
-                    </ng-container>
-                </div>
+                    </div>
+                </ng-container>
 
                 <div class="description">
                     <h2 class="section-heading">About</h2>

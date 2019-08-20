@@ -8,6 +8,7 @@ import { PillModule, TickerModule } from "@parachain-tracker/components"
 import { forkJoin, Observable } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
 import { ProjectType } from "@parachain-tracker/api-interfaces"
+import { LayoutModule } from "@angular/cdk/layout"
 
 @Injectable()
 export class ProjectRankingsResolver implements Resolve<any> {
@@ -38,6 +39,7 @@ export class ProjectRankingsResolver implements Resolve<any> {
     imports: [
         CommonModule,
         CdkTableModule,
+        LayoutModule,
         RouterModule.forChild([
             {
                 path: ":type",

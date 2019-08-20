@@ -6,7 +6,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
         <div class="hero-wrapper">
             <div>
                 <div class="hero-text">
-                    <h1>Explore DApps and Parachains <br />on the Polkadot Network</h1>
+                    <h1>
+                        Explore DApps and Parachains <br class="not-small" />on the Polkadot Network
+                    </h1>
                     <h2>
                         Discover the Pinnacle of blockchain technology in parachains and
                         possibilities with DApps
@@ -35,6 +37,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core"
                     </button>
                 </div>
                 <div class="hero-svg"></div>
+
+                <div class="follow-us">
+                    <p>Follow us at</p>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-reddit-alien"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-medium-m"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     `,

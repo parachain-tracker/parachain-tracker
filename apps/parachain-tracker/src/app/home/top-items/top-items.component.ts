@@ -14,7 +14,7 @@ import { ActivatedRoute } from "@angular/router"
                 <a [routerLink]="['/rankings', 'parachain']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
-                        <h3>view all</h3>
+                        <span>view all</span>
                     </div>
                 </a>
             </div>
@@ -34,7 +34,7 @@ import { ActivatedRoute } from "@angular/router"
                 <a [routerLink]="['/rankings', 'dapp']" class="view-all">
                     <div class="view-all-svg"></div>
                     <div>
-                        <h3>view all</h3>
+                        <span>view all</span>
                     </div>
                 </a>
             </div>
