@@ -1,0 +1,17 @@
+{
+    "type": "sqlite",
+    "synchronize": false,
+    "logging": true,
+    "migrationsRun": false,
+    "database": "database/db.sqlite",
+    "entities": ["libs/models/src/entity/*.ts"],
+    "migrations": ["database/migration/*.ts"],
+    "subscribers": ["database/subscriber/*.ts"],
+    "cli": {
+        "entitiesDir": "libs/models/src/entity",
+        "migrationsDir": "database/migration",
+        "subscribersDir": "database/subscriber"
+    },
+    "seeds": ["database/seed/*.seed.ts"],
+    "factories": ["database/factory/*.factory.ts"]
+}

@@ -1,0 +1,17 @@
+$primary-color: #670e35;
+$accent-color: #e6007a;
+$subtle-color: #d3b9c3;
+$light-color: #f7f3f7;
+$dark-color: #2d2f33;
+$max-frame-width: 1336px;
+
+$breakpoints: (
+    "handset": "(max-width: 668px)",
+    "larger-than-handset": "(min-width: 669px)",
+    "tablet": "(min-width: 669px) and (max-width: 1002px)",
+    "smaller-than-tablet": "(max-width: 1002px)",
+    "larger-than-tablet": "(min-width: 1003px)",
+    "frame": "(min-width: 1003px) and (max-width: 1336px)",
+    "smaller-than-frame": "(max-width: 1336px)",
+    "larger-than-frame": "(min-width: 1337px)",
+);

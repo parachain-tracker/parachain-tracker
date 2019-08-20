@@ -1,0 +1,185 @@
+@import "mixins";
+@import "variables";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-shadow: 0 4px 4px rgba(103, 14, 53, 0.25);
+}
+
+nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    z-index: 1;
+    width: 100%;
+    background: #e6007a;
+    mix-blend-mode: hard-light;
+}
+
+.nav-frame {
+    display: flex;
+    width: 100%;
+    max-width: $max-frame-width;
+    margin: 0 auto;
+    position: relative;
+    align-items: center;
+    padding: 0 16px;
+
+    @include media(handset) {
+        padding: 0 16px;
+    }
+}
+
+h1 {
+    /* ParachainTracker */
+
+    font-family: var(--pt-font-futura-lt);
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    color: $light-color;
+
+    @include media(handset) {
+        @include visually-hidden;
+    }
+}
+
+.disclaimer {
+    padding: 16px;
+    background: $dark-color;
+    color: $light-color;
+    font-family: var(--pt-font-sans);
+    font-size: 16px;
+
+    p {
+        max-width: $max-frame-width;
+        margin: 0 auto;
+        padding: 0 56px;
+
+        @include media(smaller-than-frame) {
+            padding: 0;
+        }
+    }
+
+    a {
+        color: $light-color;
+        text-decoration: underline;
+        white-space: nowrap;
+
+        @include media(handset) {
+            white-space: normal;
+        }
+    }
+}
+
+.heading {
+    display: flex;
+    text-decoration: none;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    margin: 0 16px 0 0;
+}
+
+.submit-project {
+    /* Subtle */
+    width: 140px;
+    height: 36px;
+    border: 2px solid #d3b9c3;
+    box-sizing: border-box;
+    border-radius: 2px;
+    text-decoration: none;
+    align-self: flex-end;
+    margin: 0 0 0 32px;
+
+    @include media(handset) {
+        margin: 0 0 0 auto;
+    }
+}
+
+.submit-project > span {
+    /* Submit a PROJECT */
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+
+    white-space: nowrap;
+    font-family: var(--pt-font-futura-md);
+    font-weight: bolder;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+
+    transform: scale(0.8, 1);
+    text-transform: uppercase;
+
+    /* Off White */
+
+    color: $light-color;
+    border-radius: 2px;
+}
+
+footer {
+    /* Rectangle 2 */
+    position: relative;
+    width: 100%;
+    height: 72px;
+
+    /* Off Black */
+
+    background: #2d2f33;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.reddit {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+
+    background: url("/assets/social/reddit.svg") no-repeat;
+}
+
+.twitter {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+
+    background: url("/assets/social/twitter.svg") no-repeat;
+}
+
+.medium {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-top: 3px;
+
+    background: url("/assets/social/medium.svg") no-repeat;
+}
+.social {
+    display: flex;
+    width: 104px;
+    height: 24px;
+    z-index: 1;
+    justify-content: space-around;
+    margin: 0 0 0 auto;
+
+    > a {
+        margin: 0 8px;
+        width: 24px;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    @include media(handset) {
+        display: none;
+    }
+}

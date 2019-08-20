@@ -1,219 +1,417 @@
 {
-  "version": 1,
-  "projects": {
-    "parachain-tracker": {
-      "projectType": "application",
-      "schematics": {
+    "version": 1,
+    "projects": {
+        "parachain-tracker": {
+            "projectType": "application",
+            "root": "apps/parachain-tracker",
+            "sourceRoot": "apps/parachain-tracker/src",
+            "prefix": "pt",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/browser",
+                        "index": "apps/parachain-tracker/src/index.html",
+                        "main": "apps/parachain-tracker/src/main.ts",
+                        "polyfills": "apps/parachain-tracker/src/polyfills.ts",
+                        "tsConfig": "apps/parachain-tracker/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "apps/parachain-tracker/src/browserconfig.xml",
+                            "apps/parachain-tracker/src/sitemap.xml",
+                            "apps/parachain-tracker/src/robots.txt",
+                            "apps/parachain-tracker/src/site.webmanifest",
+                            "apps/parachain-tracker/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/flickity/dist/flickity.css",
+                            "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+                            "apps/parachain-tracker/src/styles.scss"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/parachain-tracker/src/styles"]
+                        },
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/parachain-tracker/src/environments/environment.ts",
+                                    "with": "apps/parachain-tracker/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "parachain-tracker:build",
+                        "proxyConfig": "apps/parachain-tracker/proxy.conf.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "parachain-tracker:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "parachain-tracker:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/parachain-tracker/tsconfig.app.json",
+                            "apps/parachain-tracker/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/parachain-tracker/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/parachain-tracker/jest-angular.config.js",
+                        "tsConfig": "apps/parachain-tracker/tsconfig.spec.json",
+                        "setupFile": "apps/parachain-tracker/src/test-setup.ts"
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/server",
+                        "main": "apps/parachain-tracker/src/main.server.ts",
+                        "tsConfig": "apps/parachain-tracker/tsconfig.server.json",
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/parachain-tracker/src/styles"]
+                        }
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/parachain-tracker/src/environments/environment.ts",
+                                    "with": "apps/parachain-tracker/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "parachain-tracker-e2e": {
+            "root": "apps/parachain-tracker-e2e",
+            "sourceRoot": "apps/parachain-tracker-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/parachain-tracker-e2e/cypress.json",
+                        "tsConfig": "apps/parachain-tracker-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "parachain-tracker:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "parachain-tracker:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": ["apps/parachain-tracker-e2e/tsconfig.e2e.json"],
+                        "exclude": ["**/node_modules/**", "!apps/parachain-tracker-e2e/**"]
+                    }
+                }
+            }
+        },
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
+            "projectType": "application",
+            "prefix": "api",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api/src/environments/environment.ts",
+                                    "with": "apps/api/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**", "!apps/api/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api/jest.config.js",
+                        "tsConfig": "apps/api/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "api-interfaces": {
+            "root": "libs/api-interfaces",
+            "sourceRoot": "libs/api-interfaces/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": [
+                            "libs/api-interfaces/tsconfig.lib.json",
+                            "libs/api-interfaces/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/api-interfaces/jest.config.js",
+                        "tsConfig": "libs/api-interfaces/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "components": {
+            "projectType": "library",
+            "root": "libs/components",
+            "sourceRoot": "libs/components/src",
+            "prefix": "pt",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/components/tsconfig.lib.json",
+                            "libs/components/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/components/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/jest-angular.config.js",
+                        "tsConfig": "libs/components/tsconfig.spec.json",
+                        "setupFile": "libs/components/test-setup.ts"
+                    }
+                }
+            },
+            "schematics": {
+                "@nrwl/angular:component": {
+                    "styleext": "scss"
+                }
+            }
+        },
+        "api-consumer-producer": {
+            "root": "apps/api-consumer-producer",
+            "sourceRoot": "apps/api-consumer-producer/src",
+            "projectType": "application",
+            "prefix": "api-consumer-producer",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api-consumer-producer",
+                        "main": "apps/api-consumer-producer/src/main.ts",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.app.json",
+                        "assets": ["apps/api-consumer-producer/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api-consumer-producer/src/environments/environment.ts",
+                                    "with": "apps/api-consumer-producer/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "api-consumer-producer:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": [
+                            "apps/api-consumer-producer/tsconfig.app.json",
+                            "apps/api-consumer-producer/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/api-consumer-producer/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api-consumer-producer/jest.config.js",
+                        "tsConfig": "apps/api-consumer-producer/tsconfig.spec.json"
+                    }
+                }
+            }
+        },
+        "models": {
+            "root": "libs/models",
+            "sourceRoot": "libs/models/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:lint",
+                    "options": {
+                        "linter": "tslint",
+                        "tsConfig": [
+                            "libs/models/tsconfig.lib.json",
+                            "libs/models/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/models/**"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/models/jest.config.js",
+                        "tsConfig": "libs/models/tsconfig.spec.json"
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "schematics": {
+        "@nrwl/angular:application": {
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "unitTestRunner": "jest"
+        },
+        "@schematics/angular:component": {
+            "style": "scss",
+            "changeDetection": "OnPush",
+            "inlineTemplate": true,
+            "prefix": "pt"
+        },
         "@nrwl/angular:component": {
-          "style": "scss"
+            "style": "scss",
+            "changeDetection": "OnPush",
+            "inlineTemplate": true,
+            "prefix": "pt"
+        },
+        "@nestjs/schematics:class": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:client-app": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:configuration": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:controller": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:decorator": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:filter": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:gateway": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:guard": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:interceptor": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:interface": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:library": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:middleware": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:module": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:pipe": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:provider": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:resolver": {
+            "sourceRoot": "."
+        },
+        "@nestjs/schematics:service": {
+            "sourceRoot": "."
         }
-      },
-      "root": "apps/parachain-tracker",
-      "sourceRoot": "apps/parachain-tracker/src",
-      "prefix": "parachain-tracker",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/parachain-tracker",
-            "index": "apps/parachain-tracker/src/index.html",
-            "main": "apps/parachain-tracker/src/main.ts",
-            "polyfills": "apps/parachain-tracker/src/polyfills.ts",
-            "tsConfig": "apps/parachain-tracker/tsconfig.app.json",
-            "aot": false,
-            "assets": [
-              "apps/parachain-tracker/src/favicon.ico",
-              "apps/parachain-tracker/src/assets"
-            ],
-            "styles": ["apps/parachain-tracker/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/parachain-tracker/src/environments/environment.ts",
-                  "with": "apps/parachain-tracker/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "parachain-tracker:build",
-            "proxyConfig": "apps/parachain-tracker/proxy.conf.json"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "parachain-tracker:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "parachain-tracker:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/parachain-tracker/tsconfig.app.json",
-              "apps/parachain-tracker/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/parachain-tracker/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/parachain-tracker/jest.config.js",
-            "tsConfig": "apps/parachain-tracker/tsconfig.spec.json",
-            "setupFile": "apps/parachain-tracker/src/test-setup.ts"
-          }
-        }
-      }
     },
-    "parachain-tracker-e2e": {
-      "root": "apps/parachain-tracker-e2e",
-      "sourceRoot": "apps/parachain-tracker-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/parachain-tracker-e2e/cypress.json",
-            "tsConfig": "apps/parachain-tracker-e2e/tsconfig.e2e.json",
-            "devServerTarget": "parachain-tracker:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "parachain-tracker:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "tslint",
-            "tsConfig": ["apps/parachain-tracker-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/parachain-tracker-e2e/**"]
-          }
-        }
-      }
-    },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "prefix": "api",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "tslint",
-            "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/api/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "tsConfig": "apps/api/tsconfig.spec.json"
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "tslint",
-            "tsConfig": [
-              "libs/api-interfaces/tsconfig.lib.json",
-              "libs/api-interfaces/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-interfaces/jest.config.js",
-            "tsConfig": "libs/api-interfaces/tsconfig.spec.json"
-          }
-        }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
-    }
-  },
-  "defaultProject": "parachain-tracker"
+    "defaultProject": "parachain-tracker"
 }

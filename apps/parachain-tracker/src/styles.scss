@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "variables";
+
+:root {
+    --pt-light-color: #{$light-color};
+    --pt-dark-color: #{$dark-color};
+    --pt-primary-color: #{$primary-color};
+    --pt-accent-color: #{$accent-color};
+    --pt-subtle-color: #{$subtle-color};
+
+    --pt-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+        monospace;
+
+    --pt-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    --pt-font-futura-lt: "Futura Light BT", "Century Gothic", CenturyGothic, "Apple Gothic",
+        AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
+
+    --pt-font-futura-md: "Futura Md BT Medium", "Century Gothic", CenturyGothic, "Apple Gothic",
+        AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    color: $dark-color;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Futura Light BT";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Futura Light BT"), url("assets/fonts/Futura Light BT.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Futura Md BT Medium";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Futura Md BT Medium"), url("assets/fonts/futuram.woff") format("woff");
+}

@@ -34,6 +34,15 @@ yarn-error.log
 testem.log
 /typings
 
+# database
+/database/db.sqlite
+
 # System Files
 .DS_Store
 Thumbs.db
+
+credentials.json
+token.json
+.google_sheets.json
+.google_sheets.staging.json
+.env

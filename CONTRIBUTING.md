@@ -1,67 +1,113 @@
-# ParachainTracker
+## Global Environment
 
-This project was generated using [Nx](https://nx.dev).
+-   Node: 10.15.3
+-   Angular CLI: 8.2.0
+-   Commitizen: 4.0.3 (optional)
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+## Setup
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+Clone this repository:
 
-## Quick Start & Documentation
+```bash
+git clone https://github.com/parachain-tracker/parachain-tracker.git
+cd parachain-tracker
+```
 
-[Nx Documentation](https://nx.dev/angular)
+For development check out the develop branch
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+```bash
+git checkout develop
+```
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+Install dependencies
 
-## Adding capabilities to your workspace
+```bash
+npm install
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Database
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Run the following script to set up the database for development
 
-Below are some plugins which you can add to your workspace:
+```bash
+npm run db:init
+```
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+During development, synchronise the db whenever you change an entity
 
-## Generate an application
+```bash
+npm run db:schema:sync
+```
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+Before committing changes to an entity, generate a migration
 
-> You can use any of the plugins above to generate applications as well.
+```bash
+npm run db:migration:generate
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+When pulling code, check to see if there's any changes to the schema
 
-## Generate a library
+```bash
+npm run db:schema:log
+```
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+When ready, migrate to the latest schema
 
-> You can also use any of the plugins above to generate libraries as well.
+```bash
+npm run db:migration:run
+```
 
-Libraries are sharable across libraries and applications. They can be imported from `@parachain-tracker/mylib`.
+Revert a bad migration
+
+```bash
+npm run db:migration:revert
+```
 
 ## Development server
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `ng serve` for the Client dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+Run `ng serve api` for the API dev server. This will spin up at http://localhost:3333/api. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+These can be run on the terminal or a supported IDE (such as IntelliJ)
+
+### Libraries
+
+Run `ng g lib` to generate a library.
+
+Libraries are sharable across libraries and applications. They can be imported from `@parachain-tracker/mylib`.
+
+### Client
+
+Client side generators are provided by Angular. Refer to the [Angular documentation](https://angular.io/cli/generate) for more generators.
+
+Run `ng g module` to generate a module.
+
+Run `ng g component` to generate a component.
+
+Run `ng g directive` to generate a directive.
+
+Run `ng g service` to generate an injectable service.
+
+Or run `ng g --help` for more options
+
+### Server
+
+Server side generators are provided by NestJS. Refer to the docs for [available generators](https://docs.nestjs.com/cli/usages).
+
+Run `ng g @nrwl/nest:module --project=api` to generate a module.
+
+Run `ng g @nrwl/nest:controller --project=api` to generate an API controller.
+
+Run `ng g @nrwl/nest:service --project=api` to generate an injectable service.
 
 ## Build
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run build` to build the whole project. The build artifacts will be stored in the `dist/` directory.
+
+For debugging builds, run `ng build` for the Client and `ng build api` for the API.
 
 ## Running unit tests
 
@@ -71,7 +117,7 @@ Run `nx affected:test` to execute the unit tests affected by a change.
 
 ## Running end-to-end tests
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Run `ng e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
 Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
@@ -81,4 +127,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
 ## Further help
 
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+Visit the [Angular Documentation](https://angular.io/docs) to learn more about the Client stack.
+Visit the [NestJS Documentation](https://docs.nestjs.com/) to learn more about the API stack.
+Visit the [Nx Documentation](https://nx.dev/angular) to learn more about the project structure.
