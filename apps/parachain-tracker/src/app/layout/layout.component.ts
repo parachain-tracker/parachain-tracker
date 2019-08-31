@@ -104,7 +104,7 @@ import { Component, OnInit } from "@angular/core"
                     <a href="#"><i class="twitter"></i></a>
                     <a href="#"><i class="medium"></i></a>
                 </div>
-                <a href="https://hyungsukkang.typeform.com/to/lOEWyp" class="submit-project">
+                <a href="https://parachain-submit.typeform.com/to/lOEWyp" class="submit-project">
                     <span>SUBMIT A PROJECT</span>
                 </a>
             </div>
