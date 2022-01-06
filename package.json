@@ -83,7 +83,7 @@
     "http-proxy-middleware": "0.19.1",
     "ng2-charts": "2.3.0",
     "preboot": "7.0.0",
-    "parse-link-header": "1.0.1",
+    "parse-link-header": "2.0.0",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.2",
     "sqlite3": "4.0.9",
